@@ -1,0 +1,3 @@
+@echo off
+echo Ouverture de la page d'accueil de l'application...
+start accueil.html

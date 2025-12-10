@@ -1,0 +1,18 @@
+Fichier: output\resultat_analyse_risque_20250721_113649.xlsx
+
+Colonnes du fichier généré:
+['Milieu', 'Paramètre', 'Unité', 'Intervalle acceptable', 'Valeur mesurée', 'Résultat conformité', 'Score', 'Observations']
+
+Aperçu des premières lignes:
+  Milieu Paramètre Unité Intervalle acceptable  Valeur mesurée Résultat conformité  Score                                             Observations
+0    Eau        pH    pH             6.5 - 8.5  Non disponible          Non évalué    NaN  Données extraites de l'image insuffisantes pour analyse
+
+Types de données:
+Milieu: object
+Paramètre: object
+Unité: object
+Intervalle acceptable: object
+Valeur mesurée: object
+Résultat conformité: object
+Score: float64
+Observations: object

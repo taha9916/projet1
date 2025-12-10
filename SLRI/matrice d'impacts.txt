@@ -1,0 +1,80 @@
+MATRICE D'IMPACTS ENVIRONNEMENTAUX - SLRI
+
+=== IDENTIFICATION DES IMPACTS ===
+
+MILIEU PHYSIQUE - EAU:
+- Modification de la qualité physico-chimique
+- Altération de la température
+- Augmentation de la turbidité
+- Pollution par métaux lourds
+- Contamination par hydrocarbures
+- Eutrophisation (excès nutriments)
+
+MILIEU PHYSIQUE - SOL:
+- Contamination chimique
+- Érosion et dégradation
+- Compaction
+- Modification du pH
+- Perte de matière organique
+- Pollution par métaux lourds
+
+MILIEU PHYSIQUE - AIR:
+- Émission de particules (PM10, PM2.5)
+- Pollution gazeuse (SO2, NOx, CO)
+- Émission de poussières
+- Formation d'ozone troposphérique
+- Nuisances olfactives
+
+MILIEU BIOLOGIQUE:
+- Destruction d'habitats
+- Fragmentation écologique
+- Perturbation de la faune
+- Dégradation de la flore
+- Perte de biodiversité
+- Dérangement des espèces protégées
+
+MILIEU HUMAIN:
+- Nuisances sonores
+- Impact sur la santé publique
+- Perturbation des activités économiques
+- Atteinte au patrimoine culturel
+- Modification du paysage
+- Restriction d'accès aux ressources
+
+=== CRITÈRES D'ÉVALUATION ===
+
+INTENSITÉ:
+0 = Négligeable
+1 = Faible
+2 = Modérée
+3 = Forte
+4 = Très forte
+
+ÉTENDUE:
+0 = Ponctuelle
+1 = Locale
+2 = Régionale
+3 = Nationale
+
+DURÉE:
+0 = Temporaire (< 1 an)
+1 = Courte (1-5 ans)
+2 = Moyenne (5-15 ans)
+3 = Longue (15-30 ans)
+4 = Permanente (> 30 ans)
+
+FRÉQUENCE:
+0 = Rare
+1 = Occasionnelle
+2 = Intermittente
+3 = Régulière
+4 = Continue
+
+=== CALCUL DE L'AMPLITUDE ===
+Amplitude = Intensité × (Étendue + Durée + Fréquence)
+
+CLASSIFICATION DES IMPACTS:
+0-4   = Faible
+5-8   = Moyen
+9-12  = Fort
+13+   = Très grave

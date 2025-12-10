@@ -1,0 +1,38 @@
+# Manipulation de données
+pandas
+openpyxl==3.1.2
+numpy
+
+# Traitement de fichiers
+pdfplumber==0.10.2
+pytesseract==0.3.10
+Pillow==10.0.0
+python-docx==1.0.1
+
+# Web et API
+requests==2.31.0
+beautifulsoup4==4.12.2
+Flask==2.3.3
+Werkzeug==2.3.7
+google-generativeai==0.3.1  # Pour l'API Gemini
+
+# IA et modèles
+transformers==4.38.0  # Version plus récente pour supporter les nouveaux modèles
+torch==2.1.0
+tqdm==4.66.1
+accelerators==0.1.0  # Pour l'optimisation des modèles
+einops==0.7.0  # Requis par certains modèles comme SmolVLM
+bitsandbytes==0.41.1  # Pour la quantification des modèles (nécessaire pour dots.ocr en 4-bit)
+safetensors==0.4.1  # Format de stockage sécurisé pour les modèles
+sentencepiece==0.1.99  # Pour le tokenizer de certains modèles
+protobuf==4.24.4  # Dépendance pour les modèles
+diskcache==5.6.3  # Pour la mise en cache des résultats
+
+# Visualisation
+matplotlib==3.8.0
+
+# Tests
+pytest==7.4.0
+
+# logging et tkinter sont des modules de la bibliothèque standard Python
+# et ne doivent pas être installés via pip

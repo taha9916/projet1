@@ -1,0 +1,277 @@
+{
+  "id": "6a441262",
+  "name": "Analyse Environnementale Tarfaya",
+  "description": "Projet d'évaluation des risques environnementaux dans la région de Tarfaya, Maroc",
+  "location": "Tarfaya, Région Laâyoune-Sakia El Hamra, Maroc",
+  "created_at": "2025-08-26T12:56:58.829918",
+  "last_modified": "2025-08-26T12:56:58.934566",
+  "analyses": [
+    {
+      "id": "43597659",
+      "name": "Analyse climatique",
+      "timestamp": "2025-08-26T12:56:58.842091",
+      "source_file": "rapport_climat_tarfaya.pdf",
+      "method": "gemini",
+      "parameter_count": 5
+    },
+    {
+      "id": "1b040ef4",
+      "name": "Analyse hydrogéologique",
+      "timestamp": "2025-08-26T12:56:58.885372",
+      "source_file": "etude_hydrologie_tarfaya.pdf",
+      "method": "openai",
+      "parameter_count": 5
+    },
+    {
+      "id": "ef5aeb99",
+      "name": "Analyse qualité de l'air",
+      "timestamp": "2025-08-26T12:56:58.908848",
+      "source_file": "mesures_air_tarfaya.pdf",
+      "method": "openrouter",
+      "parameter_count": 5
+    },
+    {
+      "id": "81617206",
+      "name": "Analyse complémentaire",
+      "timestamp": "2025-08-26T12:56:58.934566",
+      "source_file": "analyse_complementaire.pdf",
+      "method": "qwen",
+      "parameter_count": 5
+    }
+  ],
+  "parameters": [
+    {
+      "Paramètre": "Température maximale (Septembre)",
+      "Valeur": "35",
+      "Unité": "°C",
+      "Intervalle acceptable": "25-45 °C",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "climat",
+      "analysis_id": "43597659",
+      "analysis_name": "Analyse climatique",
+      "timestamp": "2025-08-26T12:56:58.842091"
+    },
+    {
+      "Paramètre": "Température minimale (Janvier)",
+      "Valeur": "15",
+      "Unité": "°C",
+      "Intervalle acceptable": "5-25 °C",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "climat",
+      "analysis_id": "43597659",
+      "analysis_name": "Analyse climatique",
+      "timestamp": "2025-08-26T12:56:58.842091"
+    },
+    {
+      "Paramètre": "Précipitations annuelles moyennes",
+      "Valeur": "11",
+      "Unité": "mm",
+      "Intervalle acceptable": "200-800 mm",
+      "Score": 3,
+      "Statut": "Très en dessous",
+      "Catégorie": "climat",
+      "analysis_id": "43597659",
+      "analysis_name": "Analyse climatique",
+      "timestamp": "2025-08-26T12:56:58.842091"
+    },
+    {
+      "Paramètre": "Vitesse du vent (80% des cas)",
+      "Valeur": "4-9",
+      "Unité": "m/s",
+      "Intervalle acceptable": "2-15 m/s",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "climat",
+      "analysis_id": "43597659",
+      "analysis_name": "Analyse climatique",
+      "timestamp": "2025-08-26T12:56:58.842091"
+    },
+    {
+      "Paramètre": "Fréquence du vent de Nord-Nord-est",
+      "Valeur": "28.8",
+      "Unité": "%",
+      "Intervalle acceptable": "15-40 %",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "climat",
+      "analysis_id": "43597659",
+      "analysis_name": "Analyse climatique",
+      "timestamp": "2025-08-26T12:56:58.842091"
+    },
+    {
+      "Paramètre": "Surface Sebkha Lahmira",
+      "Valeur": "632",
+      "Unité": "ha",
+      "Intervalle acceptable": "500-700 ha",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "hydrologie",
+      "analysis_id": "1b040ef4",
+      "analysis_name": "Analyse hydrogéologique",
+      "timestamp": "2025-08-26T12:56:58.885372"
+    },
+    {
+      "Paramètre": "Profondeur Sebkha Lahmira",
+      "Valeur": "4",
+      "Unité": "m",
+      "Intervalle acceptable": "2-8 m",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "hydrologie",
+      "analysis_id": "1b040ef4",
+      "analysis_name": "Analyse hydrogéologique",
+      "timestamp": "2025-08-26T12:56:58.885372"
+    },
+    {
+      "Paramètre": "Surface Sebkha Tizfourine",
+      "Valeur": "2346",
+      "Unité": "ha",
+      "Intervalle acceptable": "2000-3000 ha",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "hydrologie",
+      "analysis_id": "1b040ef4",
+      "analysis_name": "Analyse hydrogéologique",
+      "timestamp": "2025-08-26T12:56:58.885372"
+    },
+    {
+      "Paramètre": "Profondeur Sebkha Tizfourine",
+      "Valeur": "5.5",
+      "Unité": "m",
+      "Intervalle acceptable": "3-7 m",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "hydrologie",
+      "analysis_id": "1b040ef4",
+      "analysis_name": "Analyse hydrogéologique",
+      "timestamp": "2025-08-26T12:56:58.885372"
+    },
+    {
+      "Paramètre": "Débit pointe Oued El Hamra (estimé)",
+      "Valeur": "1-10",
+      "Unité": "m³/s",
+      "Intervalle acceptable": "0.5-15 m³/s",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "hydrologie",
+      "analysis_id": "1b040ef4",
+      "analysis_name": "Analyse hydrogéologique",
+      "timestamp": "2025-08-26T12:56:58.885372"
+    },
+    {
+      "Paramètre": "CO2",
+      "Valeur": "420",
+      "Unité": "ppm",
+      "Intervalle acceptable": "350-450 ppm",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "air",
+      "analysis_id": "ef5aeb99",
+      "analysis_name": "Analyse qualité de l'air",
+      "timestamp": "2025-08-26T12:56:58.908848"
+    },
+    {
+      "Paramètre": "CO2",
+      "Valeur": "450",
+      "Unité": "ppm",
+      "Intervalle acceptable": "350-450 ppm",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "air",
+      "analysis_id": "81617206",
+      "analysis_name": "Analyse complémentaire",
+      "timestamp": "2025-08-26T12:56:58.934566"
+    },
+    {
+      "Paramètre": "NOx",
+      "Valeur": "65",
+      "Unité": "µg/m³",
+      "Intervalle acceptable": "0-40 µg/m³",
+      "Score": 3,
+      "Statut": "Très au dessus",
+      "Catégorie": "air",
+      "analysis_id": "ef5aeb99",
+      "analysis_name": "Analyse qualité de l'air",
+      "timestamp": "2025-08-26T12:56:58.908848"
+    },
+    {
+      "Paramètre": "PM10",
+      "Valeur": "35",
+      "Unité": "µg/m³",
+      "Intervalle acceptable": "0-50 µg/m³",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "air",
+      "analysis_id": "ef5aeb99",
+      "analysis_name": "Analyse qualité de l'air",
+      "timestamp": "2025-08-26T12:56:58.908848"
+    },
+    {
+      "Paramètre": "PM2.5",
+      "Valeur": "18",
+      "Unité": "µg/m³",
+      "Intervalle acceptable": "0-25 µg/m³",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "air",
+      "analysis_id": "ef5aeb99",
+      "analysis_name": "Analyse qualité de l'air",
+      "timestamp": "2025-08-26T12:56:58.908848"
+    },
+    {
+      "Paramètre": "SO2",
+      "Valeur": "45",
+      "Unité": "µg/m³",
+      "Intervalle acceptable": "0-125 µg/m³",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "air",
+      "analysis_id": "ef5aeb99",
+      "analysis_name": "Analyse qualité de l'air",
+      "timestamp": "2025-08-26T12:56:58.908848"
+    },
+    {
+      "Paramètre": "pH",
+      "Valeur": "7.2",
+      "Unité": "-",
+      "Intervalle acceptable": "6.5-8.5 -",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "eau",
+      "analysis_id": "81617206",
+      "analysis_name": "Analyse complémentaire",
+      "timestamp": "2025-08-26T12:56:58.934566"
+    },
+    {
+      "Paramètre": "Turbidité",
+      "Valeur": "3.5",
+      "Unité": "NTU",
+      "Intervalle acceptable": "0-5 NTU",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "eau",
+      "analysis_id": "81617206",
+      "analysis_name": "Analyse complémentaire",
+      "timestamp": "2025-08-26T12:56:58.934566"
+    },
+    {
+      "Paramètre": "Métaux lourds Pb",
+      "Valeur": "25",
+      "Unité": "mg/kg",
+      "Intervalle acceptable": "0-100 mg/kg",
+      "Score": 1,
+      "Statut": "Conforme",
+      "Catégorie": "sol",
+      "analysis_id": "81617206",
+      "analysis_name": "Analyse complémentaire",
+      "timestamp": "2025-08-26T12:56:58.934566"
+    }
+  ],
+  "metadata": {
+    "total_analyses": 4,
+    "total_parameters": 19,
+    "last_analysis_date": "2025-08-26T12:56:58.934566"
+  }
+}

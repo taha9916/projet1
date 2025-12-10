@@ -1,0 +1,1117 @@
+================================================================================
+
+INFORMATIONS SUR LE FICHIER:
+Fichier analysé: E:\Users\tahaa\OneDrive\Bureau\1test risque\projet_1\output\Extracted pages from EIE HUB TARFAYA GREEN AMMONIA v2_texte_extrait.txt
+Taille: 91.59 KB
+Encodage: utf-8
+Nombre de caractères: 88442
+Nombre de lignes: 1773
+Nombre de mots: 14427
+
+RÉSUMÉ DES PARAMÈTRES TROUVÉS:
+Paramètres uniques trouvés: 11
+Total des occurrences de paramètres: 138
+
+MOTS-CLÉS ENVIRONNEMENTAUX DÉTECTÉS:
+  - niveau: 33 occurrence(s)
+  - eau: 24 occurrence(s)
+  - faune: 23 occurrence(s)
+  - espèce: 21 occurrence(s)
+  - danger: 19 occurrence(s)
+  - vu: 17 occurrence(s)
+  - chasse: 16 occurrence(s)
+  - flore: 15 occurrence(s)
+  - impact: 13 occurrence(s)
+  - protection: 13 occurrence(s)
+  - désert: 13 occurrence(s)
+  - habitat: 12 occurrence(s)
+  - menacé: 12 occurrence(s)
+  - vulnérable: 12 occurrence(s)
+  - conservation: 10 occurrence(s)
+  - population: 10 occurrence(s)
+  - effet: 9 occurrence(s)
+  - menace: 8 occurrence(s)
+  - mer: 8 occurrence(s)
+  - dispose: 8 occurrence(s)
+  - biodiversité: 7 occurrence(s)
+  - naturel: 7 occurrence(s)
+  - sol: 6 occurrence(s)
+  - sauvage: 6 occurrence(s)
+  - cite: 6 occurrence(s)
+  - biologique: 5 occurrence(s)
+  - commun: 5 occurrence(s)
+  - domestique: 5 occurrence(s)
+  - place: 5 occurrence(s)
+  - réglementation: 5 occurrence(s)
+  - environnement: 4 occurrence(s)
+  - côte: 4 occurrence(s)
+  - écologique: 4 occurrence(s)
+  - rare: 4 occurrence(s)
+  - urbain: 4 occurrence(s)
+  - rural: 4 occurrence(s)
+  - observé: 4 occurrence(s)
+  - situe: 4 occurrence(s)
+  - qualité: 4 occurrence(s)
+  - écologie: 3 occurrence(s)
+  - climat: 3 occurrence(s)
+  - océan: 3 occurrence(s)
+  - littoral: 3 occurrence(s)
+  - nécessaire: 3 occurrence(s)
+  - humain: 3 occurrence(s)
+  - mesure: 3 occurrence(s)
+  - relevé: 3 occurrence(s)
+  - suivi: 3 occurrence(s)
+  - utilisé: 3 occurrence(s)
+  - situé: 3 occurrence(s)
+  - analyse: 3 occurrence(s)
+  - valeur: 3 occurrence(s)
+  - risque: 2 occurrence(s)
+  - air: 2 occurrence(s)
+  - terre: 2 occurrence(s)
+  - physique: 2 occurrence(s)
+  - climatique: 2 occurrence(s)
+  - côtier: 2 occurrence(s)
+  - humide: 2 occurrence(s)
+  - modifié: 2 occurrence(s)
+  - divers: 2 occurrence(s)
+  - varie: 2 occurrence(s)
+  - culturel: 2 occurrence(s)
+  - caractérisé: 2 occurrence(s)
+  - identifié: 2 occurrence(s)
+  - noté: 2 occurrence(s)
+  - affecté: 2 occurrence(s)
+  - atteint: 2 occurrence(s)
+  - limite: 2 occurrence(s)
+  - cote: 1 occurrence(s)
+  - zone humide: 1 occurrence(s)
+  - géologique: 1 occurrence(s)
+  - terrestre: 1 occurrence(s)
+  - marin: 1 occurrence(s)
+  - continental: 1 occurrence(s)
+  - sec: 1 occurrence(s)
+  - calme: 1 occurrence(s)
+  - instable: 1 occurrence(s)
+  - protégé: 1 occurrence(s)
+  - adaptable: 1 occurrence(s)
+  - utile: 1 occurrence(s)
+  - abondant: 1 occurrence(s)
+  - unique: 1 occurrence(s)
+  - simple: 1 occurrence(s)
+  - touristique: 1 occurrence(s)
+  - sonore: 1 occurrence(s)
+  - reconnaissable: 1 occurrence(s)
+  - dynamique: 1 occurrence(s)
+  - variable: 1 occurrence(s)
+  - régulier: 1 occurrence(s)
+  - quotidien: 1 occurrence(s)
+  - temporaire: 1 occurrence(s)
+  - adéquat: 1 occurrence(s)
+  - évalué: 1 occurrence(s)
+  - constaté: 1 occurrence(s)
+  - garde: 1 occurrence(s)
+  - tracé: 1 occurrence(s)
+  - marqué: 1 occurrence(s)
+  - structure: 1 occurrence(s)
+  - influencé: 1 occurrence(s)
+  - influence: 1 occurrence(s)
+  - impacté: 1 occurrence(s)
+  - capture: 1 occurrence(s)
+  - distingue: 1 occurrence(s)
+  - standard: 1 occurrence(s)
+  - indicateur: 1 occurrence(s)
+
+DÉTAIL DES PARAMÈTRES EXTRAITS:
+  Température:
+    - Valeur: 39 °C
+      Contexte: "ature minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b"
+
+    - Valeur: 39 °C
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 39 °C
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+  Précipitations:
+    - Valeur: 163 mm
+      Contexte: "andis que la température minimale est de 15°C.
+b) Pluviométrie :
+163
+Figure 51: Diagramme de précipitation au niveau de"
+
+    - Valeur: 39 m
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11 mm
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 39 m
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11 mm
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+  Vents:
+    - Valeur: 164
+      Contexte: "rs au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164
+Figure 53: la rose des vents au niveau de la commu"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+  Altitude:
+    - Valeur: 25 m
+      Contexte: "aphie
+Les Les plaines côtières de Tarfaya ont une altitude moyenne de 25 à 35m. Les graaramaader sont des
+dépressions de forme o"
+
+  Superficie:
+    - Valeur: 4.4
+      Contexte: "térieur des
+terres.
+Lagune de Khenifiss Massif dunaire
+4.4. Description du milieu humain
+4.4.1. Situation ad"
+
+    - Valeur: 2700 m2
+      Contexte: "• L’oued Chebeïka, au bassin très étendu (2700 km2), notamment sur le massif primaire, a des crues très"
+
+    - Valeur: 600 m2
+      Contexte: "• L’oued El Hamra, a un bassin versant de 600 km2 environ, entièrement situé dans les calcaires de la"
+
+    - Valeur: 900 m2
+      Contexte: "• L’oued Ben-Khlil, au bassin versant de 900 km2, est constitué de formations primaires en amont (jbel Zini),"
+
+    - Valeur: 34 ha
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 197 ha
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200 ha
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 3300 ha
+      Contexte: "Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+    - Valeur: 34 ha
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 197 ha
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200 ha
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 3300 ha
+      Contexte: "a) Le pilotage
+Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+  Azote:
+    - Valeur: 5
+      Contexte: "• L’oued Drâ, connaît une crue notable tous les deux à quatre ans et une très forte crue tous les 5 à 7 ans."
+
+    - Valeur: 2700
+      Contexte: "• L’oued Chebeïka, au bassin très étendu (2700 km2), notamment sur le massif primaire, a des crues très"
+
+    - Valeur: 600
+      Contexte: "• L’oued El Hamra, a un bassin versant de 600 km2 environ, entièrement situé dans les calcaires de la"
+
+    - Valeur: 700
+      Contexte: "• L’oued Ez Zehar, possède un bassin versant de 700 km2. La ressemblance des écoulements avec ceux de"
+
+    - Valeur: 900
+      Contexte: "• L’oued Ben-Khlil, au bassin versant de 900 km2, est constitué de formations primaires en amont (jbel Zini),"
+
+    - Valeur: 2017
+      Contexte: "- Endémisme marocain : Cuzin et Al, 2017 : Mammifères sauvages du Maroc : Peuplement, répartition, écologie."
+
+    - Valeur: 29
+      Contexte: "- Loi 29-05 (Loi marocaine) : Décret d’application de la CITES au Maroc du 21-05-2015 : espèce figurant en annexe I"
+
+    - Valeur: 2019
+      Contexte: "- Martinez del Marmol et al, 2019 : Amphibiens et reptiles du Maroc"
+
+    - Valeur: 29
+      Contexte: "• Loi 29 -05 : Relative à la protection des espèces de la flore et la faune sauvages et au contrôle de leur"
+
+    - Valeur: 2009
+      Contexte: "• -Directive oiseaux : Directive 2009/147/CE du 30 novembre 2009"
+
+    - Valeur: 2019
+      Contexte: "- Martinez del Marmol et al, 2019 : Amphibiens et reptiles du Maroc"
+
+    - Valeur: 4
+      Contexte: "4. DESCRIPTION DE L’ETAT INITIAL DU SITE ET DE SON ENVIRONNEMENT"
+
+    - Valeur: 2008
+      Contexte: "2008. Par la suite, le projet de liaison a été relancé en 2014 par la compagnie norvégienne Fred. Olsen &"
+
+    - Valeur: 5
+      Contexte: "5. IDENTIFICATION ET EVALUATION DES IMPACTS POTENTIELS DU"
+
+    - Valeur: 39
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 172
+      Contexte: "La carte de sismicité du Maroc ci-dessous révèle que le Maroc est divisé en plusieurs zones de sismicité
+avec différents niveaux de risque sismique. Ces zones sont définies comme suit :
+172"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet, les experts de Biotope ont réalisé
+des prospections de jour (à l’aube), à vue (avec ou sans jumelles/longue vue) et à l’écoute (chants, cris,
+tambourinages des pics …). Pour mener à bien cette collecte des données liées à l’avifaune, trois (03) méthodes
+principales sont mises en place sur le site du projet GH2 TARFAYA HUB, à savoir :
+182"
+
+    - Valeur: 184
+      Contexte: "Ci-dessous, illustrations de quelques espèces d’oiseaux observées lors de la mission :
+184"
+
+    - Valeur: 194
+      Contexte: "Concernant les enjeux pour l’avifaune migratrice postnuptiale, il est possible de distinguer différents niveaux
+d’intérêt d’habitats en lien avec la présence d’espèces en halte migratoire.
+Le tableau ci-après synthétise cette analyse sur la zone d’étude immédiate et rapprochée :
+194"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet en période d’hivernage,
+les experts engagés dans la présente mission ont réalisé des prospections de jour, à vue (avec ou sans
+jumelles/longue vue) et à l’écoute (chants, cris, tambourinages des pics …). Trois (03) principales
+méthodes de collectes de données ornithologiques ont été utilisées :
+196"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 4
+      Contexte: "Les 4 communes rurales restantes sont rattachées à 4 caïdats, eux-mêmes rattachés à 2 cercles :
+213"
+
+    - Valeur: 3300
+      Contexte: "Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+    - Valeur: 39
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 172
+      Contexte: "La carte de sismicité du Maroc ci-dessous révèle que le Maroc est divisé en plusieurs zones de sismicité
+avec différents niveaux de risque sismique. Ces zones sont définies comme suit :
+172"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet, les experts de Biotope ont réalisé
+des prospections de jour (à l’aube), à vue (avec ou sans jumelles/longue vue) et à l’écoute (chants, cris,
+tambourinages des pics …). Pour mener à bien cette collecte des données liées à l’avifaune, trois (03) méthodes
+principales sont mises en place sur le site du projet GH2 TARFAYA HUB, à savoir :
+182"
+
+    - Valeur: 184
+      Contexte: "Ci-dessous, illustrations de quelques espèces d’oiseaux observées lors de la mission :
+184"
+
+    - Valeur: 2011
+      Contexte: "-El Agbani, M.-A., & A. Qninba. 2011. Les oiseaux d'intérêt patrimonial au Maroc.
+➢ Evaluation de l’intérêt des unités écologiques identifiées pour la halte migratoire
+postnuptiale
+Concernant les enjeux pour l’avifaune migratrice postnuptiale, il est possible de distinguer différents niveaux
+d’intérêt d’habitats en lien avec la présence d’espèces en halte migratoire.
+Le tableau ci-après synthétise cette analyse sur la zone d’étude immédiate et rapprochée :
+194"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet en période d’hivernage,
+les experts engagés dans la présente mission ont réalisé des prospections de jour, à vue (avec ou sans
+jumelles/longue vue) et à l’écoute (chants, cris, tambourinages des pics …). Trois (03) principales
+méthodes de collectes de données ornithologiques ont été utilisées :
+196"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 4
+      Contexte: "le chef-lieu.
+Les 4 communes rurales restantes sont rattachées à 4 caïdats, eux-mêmes rattachés à 2 cercles :
+213"
+
+    - Valeur: 3300
+      Contexte: "a) Le pilotage
+Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+  Métaux lourds:
+    - Valeur: 5
+      Contexte: "• L’oued Drâ, connaît une crue notable tous les deux à quatre ans et une très forte crue tous les 5 à 7 ans."
+
+    - Valeur: 2700
+      Contexte: "• L’oued Chebeïka, au bassin très étendu (2700 km2), notamment sur le massif primaire, a des crues très"
+
+    - Valeur: 600
+      Contexte: "• L’oued El Hamra, a un bassin versant de 600 km2 environ, entièrement situé dans les calcaires de la"
+
+    - Valeur: 700
+      Contexte: "• L’oued Ez Zehar, possède un bassin versant de 700 km2. La ressemblance des écoulements avec ceux de"
+
+    - Valeur: 900
+      Contexte: "• L’oued Ben-Khlil, au bassin versant de 900 km2, est constitué de formations primaires en amont (jbel Zini),"
+
+    - Valeur: 2017
+      Contexte: "- Endémisme marocain : Cuzin et Al, 2017 : Mammifères sauvages du Maroc : Peuplement, répartition, écologie."
+
+    - Valeur: 29
+      Contexte: "- Loi 29-05 (Loi marocaine) : Décret d’application de la CITES au Maroc du 21-05-2015 : espèce figurant en annexe I"
+
+    - Valeur: 4
+      Contexte: "4. DESCRIPTION DE L’ETAT INITIAL DU SITE ET DE SON ENVIRONNEMENT"
+
+    - Valeur: 2008
+      Contexte: "2008. Par la suite, le projet de liaison a été relancé en 2014 par la compagnie norvégienne Fred. Olsen &"
+
+    - Valeur: 39
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 172
+      Contexte: "La carte de sismicité du Maroc ci-dessous révèle que le Maroc est divisé en plusieurs zones de sismicité
+avec différents niveaux de risque sismique. Ces zones sont définies comme suit :
+172"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet, les experts de Biotope ont réalisé
+des prospections de jour (à l’aube), à vue (avec ou sans jumelles/longue vue) et à l’écoute (chants, cris,
+tambourinages des pics …). Pour mener à bien cette collecte des données liées à l’avifaune, trois (03) méthodes
+principales sont mises en place sur le site du projet GH2 TARFAYA HUB, à savoir :
+182"
+
+    - Valeur: 194
+      Contexte: "Concernant les enjeux pour l’avifaune migratrice postnuptiale, il est possible de distinguer différents niveaux
+d’intérêt d’habitats en lien avec la présence d’espèces en halte migratoire.
+Le tableau ci-après synthétise cette analyse sur la zone d’étude immédiate et rapprochée :
+194"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet en période d’hivernage,
+les experts engagés dans la présente mission ont réalisé des prospections de jour, à vue (avec ou sans
+jumelles/longue vue) et à l’écoute (chants, cris, tambourinages des pics …). Trois (03) principales
+méthodes de collectes de données ornithologiques ont été utilisées :
+196"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 3300
+      Contexte: "Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+    - Valeur: 39
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 172
+      Contexte: "La carte de sismicité du Maroc ci-dessous révèle que le Maroc est divisé en plusieurs zones de sismicité
+avec différents niveaux de risque sismique. Ces zones sont définies comme suit :
+172"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet, les experts de Biotope ont réalisé
+des prospections de jour (à l’aube), à vue (avec ou sans jumelles/longue vue) et à l’écoute (chants, cris,
+tambourinages des pics …). Pour mener à bien cette collecte des données liées à l’avifaune, trois (03) méthodes
+principales sont mises en place sur le site du projet GH2 TARFAYA HUB, à savoir :
+182"
+
+    - Valeur: 2011
+      Contexte: "-El Agbani, M.-A., & A. Qninba. 2011. Les oiseaux d'intérêt patrimonial au Maroc.
+➢ Evaluation de l’intérêt des unités écologiques identifiées pour la halte migratoire
+postnuptiale
+Concernant les enjeux pour l’avifaune migratrice postnuptiale, il est possible de distinguer différents niveaux
+d’intérêt d’habitats en lien avec la présence d’espèces en halte migratoire.
+Le tableau ci-après synthétise cette analyse sur la zone d’étude immédiate et rapprochée :
+194"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet en période d’hivernage,
+les experts engagés dans la présente mission ont réalisé des prospections de jour, à vue (avec ou sans
+jumelles/longue vue) et à l’écoute (chants, cris, tambourinages des pics …). Trois (03) principales
+méthodes de collectes de données ornithologiques ont été utilisées :
+196"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 3300
+      Contexte: "a) Le pilotage
+Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+    - Valeur: 220
+      Contexte: "a) Agriculture :
+220"
+
+  Phosphore:
+    - Valeur: 2700
+      Contexte: "• L’oued Chebeïka, au bassin très étendu (2700 km2), notamment sur le massif primaire, a des crues très"
+
+    - Valeur: 700
+      Contexte: "• L’oued Ez Zehar, possède un bassin versant de 700 km2. La ressemblance des écoulements avec ceux de"
+
+    - Valeur: 900
+      Contexte: "• L’oued Ben-Khlil, au bassin versant de 900 km2, est constitué de formations primaires en amont (jbel Zini),"
+
+    - Valeur: 2017
+      Contexte: "- Endémisme marocain : Cuzin et Al, 2017 : Mammifères sauvages du Maroc : Peuplement, répartition, écologie."
+
+    - Valeur: 29
+      Contexte: "- Loi 29-05 (Loi marocaine) : Décret d’application de la CITES au Maroc du 21-05-2015 : espèce figurant en annexe I"
+
+    - Valeur: 2019
+      Contexte: "- Martinez del Marmol et al, 2019 : Amphibiens et reptiles du Maroc"
+
+    - Valeur: 29
+      Contexte: "• Loi 29 -05 : Relative à la protection des espèces de la flore et la faune sauvages et au contrôle de leur"
+
+    - Valeur: 2019
+      Contexte: "- Martinez del Marmol et al, 2019 : Amphibiens et reptiles du Maroc"
+
+    - Valeur: 4
+      Contexte: "4. DESCRIPTION DE L’ETAT INITIAL DU SITE ET DE SON ENVIRONNEMENT"
+
+    - Valeur: 2008
+      Contexte: "2008. Par la suite, le projet de liaison a été relancé en 2014 par la compagnie norvégienne Fred. Olsen &"
+
+    - Valeur: 5
+      Contexte: "5. IDENTIFICATION ET EVALUATION DES IMPACTS POTENTIELS DU"
+
+    - Valeur: 39
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 172
+      Contexte: "La carte de sismicité du Maroc ci-dessous révèle que le Maroc est divisé en plusieurs zones de sismicité
+avec différents niveaux de risque sismique. Ces zones sont définies comme suit :
+172"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet, les experts de Biotope ont réalisé
+des prospections de jour (à l’aube), à vue (avec ou sans jumelles/longue vue) et à l’écoute (chants, cris,
+tambourinages des pics …). Pour mener à bien cette collecte des données liées à l’avifaune, trois (03) méthodes
+principales sont mises en place sur le site du projet GH2 TARFAYA HUB, à savoir :
+182"
+
+    - Valeur: 184
+      Contexte: "Ci-dessous, illustrations de quelques espèces d’oiseaux observées lors de la mission :
+184"
+
+    - Valeur: 194
+      Contexte: "Concernant les enjeux pour l’avifaune migratrice postnuptiale, il est possible de distinguer différents niveaux
+d’intérêt d’habitats en lien avec la présence d’espèces en halte migratoire.
+Le tableau ci-après synthétise cette analyse sur la zone d’étude immédiate et rapprochée :
+194"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet en période d’hivernage,
+les experts engagés dans la présente mission ont réalisé des prospections de jour, à vue (avec ou sans
+jumelles/longue vue) et à l’écoute (chants, cris, tambourinages des pics …). Trois (03) principales
+méthodes de collectes de données ornithologiques ont été utilisées :
+196"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 3300
+      Contexte: "Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+    - Valeur: 39
+      Contexte: "Au niveau de la zone d’étude, Sur l’échelle annuelle, l’évolution des normales mensuelles des
+températures montre que le mois d’Août est le mois le plus chaud et le mois de Janvier est le mois le
+plus froid. La normale mensuelle de la température maximale du mois de septembre est de 39°C. Et la
+normale mensuelle de la température minimale du mois de Janvier est de 15°C.
+La température maximale peut atteindre 39°C tandis que la température minimale est de 15°C.
+b) Pluviométrie :
+163"
+
+    - Valeur: 11
+      Contexte: "La pluviométrie est particulièrement peu abondante. Les précipitations sont aléatoires à caractère bref,
+violent et orageux. La moyenne annuelle des précipitations est d’environ 11 mm. En effet, il fluctue
+entre un minimum de 2 mm un maximum de 20 mm, la plupart des jours au cours de l’année ce sont des
+jours secs.
+c) Vents :
+164"
+
+    - Valeur: 172
+      Contexte: "La carte de sismicité du Maroc ci-dessous révèle que le Maroc est divisé en plusieurs zones de sismicité
+avec différents niveaux de risque sismique. Ces zones sont définies comme suit :
+172"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet, les experts de Biotope ont réalisé
+des prospections de jour (à l’aube), à vue (avec ou sans jumelles/longue vue) et à l’écoute (chants, cris,
+tambourinages des pics …). Pour mener à bien cette collecte des données liées à l’avifaune, trois (03) méthodes
+principales sont mises en place sur le site du projet GH2 TARFAYA HUB, à savoir :
+182"
+
+    - Valeur: 184
+      Contexte: "Ci-dessous, illustrations de quelques espèces d’oiseaux observées lors de la mission :
+184"
+
+    - Valeur: 2011
+      Contexte: "-El Agbani, M.-A., & A. Qninba. 2011. Les oiseaux d'intérêt patrimonial au Maroc.
+➢ Evaluation de l’intérêt des unités écologiques identifiées pour la halte migratoire
+postnuptiale
+Concernant les enjeux pour l’avifaune migratrice postnuptiale, il est possible de distinguer différents niveaux
+d’intérêt d’habitats en lien avec la présence d’espèces en halte migratoire.
+Le tableau ci-après synthétise cette analyse sur la zone d’étude immédiate et rapprochée :
+194"
+
+    - Valeur: 03
+      Contexte: "Afin de recenser les espèces ornithologiques caractérisant la zone du projet en période d’hivernage,
+les experts engagés dans la présente mission ont réalisé des prospections de jour, à vue (avec ou sans
+jumelles/longue vue) et à l’écoute (chants, cris, tambourinages des pics …). Trois (03) principales
+méthodes de collectes de données ornithologiques ont été utilisées :
+196"
+
+    - Valeur: 197
+      Contexte: "Pour l’inventaire des chauves-souris au niveau du site de projet, deux méthodes d’observation sont
+mises en place, à savoir :
+197"
+
+    - Valeur: 200
+      Contexte: "La collecte des données relatives aux macroinvertébrés sur le terrain implique l'utilisation de diverses
+méthodes d'échantillonnage entomologique, sélectionnées en fonction de la nature de l'étude et des
+exigences du terrain, pour cibler spécifiquement les espèces recherchées. Pour optimiser la capture
+d'un maximum d'espèces présentes, nous avons choisi de nous concentrer sur les groupes d'insectes
+les plus pertinents pour notre zone d'étude, notamment les Lépidoptères (papillons), les Coléoptères
+(scarabées, coccinelles, etc.), les Orthoptères (criquets), les arachnides.... Afin de couvrir une large
+gamme de micro-habitats, nous avons utilisé diverses techniques de collecte pour explorer les stations
+prospectées et appréhender les différentes communautés d'insectes présentes. Ces méthodes
+d’inventaire entomologique sont présentées ci-dessous :
+200"
+
+    - Valeur: 3300
+      Contexte: "a) Le pilotage
+Le port de Tarfaya ne dispose pas de pilotine et de pilote pour le moment.
+b) Le remorquage
+Le port de Tarfaya dispose d’un remorqueur de type ASD de 3300 CV avec six membres d’équipage à bord.
+Il opère sous la direction de la Capitainerie de Laâyoune.
+c) Le lamanage
+Le port de Tarfaya ne dispose pas d’un service de lamanage pour le moment.
+d) La manutention portuaire
+C’est une opération indispensable pour le chargement et le déchargement des navires de commerce (
+marchandises diverses et Vrac solides). A ce jour, il n’a été constaté, ni la présence des équipements de
+manutention horizontale ou verticale sur le quai, ni la présence de superstructure d’accueil des passagers
+(gare maritime par exemple ).
+e ) Le soutage
+Le port de Tarfaya ne dispose pas de barge d’avitaillement mais d’un réseau de pipelines enterrées
+desservant les quais de la pêche pour le ravitaillent des bateaux de la pêche en GO. Les embarcations se
+ravitaillent au niveau des stations-services directement par Jerricanes de 25 litres.
+3.5.2.5.2. Besoins des initiateurs du projet et critères généraux de conception :
+219"
+
+  Débit:
+    - Valeur: 700
+      Contexte: "• L’oued Ez Zehar, possède un bassin versant de 700 km2. La ressemblance des écoulements avec ceux de"
+
+  Ph:
+    - Valeur: 2019
+      Contexte: "- Martinez del Marmol et al, 2019 : Amphibiens et reptiles du Maroc"
+
+    - Valeur: 2019
+      Contexte: "- Martinez del Marmol et al, 2019 : Amphibiens et reptiles du Maroc"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+  Conductivité:
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+    - Valeur: 34
+      Contexte: "Les prospections effectuées ont permis de recenser 34 espèces végétales au niveau de la zone du projet. Ces
+espèces présentent des caractéristiques très particulières lui permettant de résister aux conditions climatiques
+et météorologiques extrêmes qualifiant la zone tout en conférant un intérêt spécifique.
+Nous notons qu’il s’agit d’un inventaire préliminaire. Des inventaires plus poussés seront réalisés lors de la
+prochaine mission en utilisant des méthodes d’inventaire botanique appropriées tout en se basant sur le relevé
+phytosociologique.
+La liste complète des espèces contactées est présentée dans le tableau suivant :
+176"
+
+SUGGESTIONS D'AMÉLIORATION:
+
+  [INFO] Paramètres environnementaux manquants: profondeur, turbidité, salinité, DBO5, DCO, oxygène dissous, hydrocarbures.
+  Solution: Ajoutez ces paramètres au fichier si vous disposez des informations correspondantes.
+
+================================================================================
+CONCLUSION: 138 paramètres environnementaux ont été trouvés dans le fichier.
+Suivez les suggestions ci-dessus pour améliorer davantage l'extraction.
+================================================================================

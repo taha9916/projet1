@@ -1,0 +1,475 @@
+import os
+import sys
+import json
+import requests
+import pandas as pd
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Fonction pour créer une session HTTP avec retry
+def create_session_with_retry(retries=3, backoff_factor=0.3):
+    session = requests.Session()
+    retry = Retry(
+        total=retries,
+        read=retries,
+        connect=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[500, 502, 503, 504],
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('http://', adapter)
+    session.mount('https://', adapter)
+    return session
+
+from datetime import datetime
+
+# Configuration des API
+def load_api_config():
+    """Charge la configuration des API externes."""
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "external_api_config.json")
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        if isinstance(e, requests.exceptions.RequestException):
+            if 'WinError 10013' in str(e):
+                print(f"Erreur d'autorisation réseau: {e}. Essayez d'exécuter l'application en tant qu'administrateur.")
+            else:
+                print(f"Erreur lors du chargement de la configuration: {e}")
+        return {}
+
+# Fonctions pour récupérer les données des API
+def get_coordinates(city, country=None, config=None):
+    """Convertit un nom de ville en coordonnées géographiques via Nominatim (OpenStreetMap)."""
+    if not config:
+        config = load_api_config()
+    
+    # Si on a déjà des coordonnées, les retourner directement
+    try:
+        lat, lon = float(city), float(country)
+        return lat, lon
+    except (ValueError, TypeError):
+        pass
+    
+    # Utiliser Nominatim (OpenStreetMap) pour obtenir les coordonnées
+    url = "https://nominatim.openstreetmap.org/search"
+    params = {
+        "q": city,
+        "format": "json",
+        "limit": 1
+    }
+    
+    if country:
+        params["countrycodes"] = country
+    
+    try:
+        # Nominatim exige un User-Agent personnalisé
+        headers = {
+            'User-Agent': 'EnvironmentalDataCollector/1.0 (projet_1; contact@example.com)'
+        }
+        session = create_session_with_retry()
+        response = session.get(url, params=params, headers=headers)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data and len(data) > 0:
+            lat = float(data[0]["lat"])
+            lon = float(data[0]["lon"])
+            return lat, lon
+    except Exception as e:
+        if isinstance(e, requests.exceptions.RequestException):
+            if 'WinError 10013' in str(e):
+                print(f"Erreur d'autorisation réseau: {e}. Essayez d'exécuter l'application en tant qu'administrateur.")
+            else:
+                print(f"Erreur lors de la récupération des coordonnées: {e}")
+    
+    return None, None
+
+def get_weather_data(location, config=None):
+    """Récupère les données météorologiques via OpenWeatherMap."""
+    if not config:
+        config = load_api_config()
+    
+    openweathermap_config = config.get("openweathermap", {})
+    api_key = openweathermap_config.get("api_key")
+    
+    if not api_key:
+        print("Erreur: Clé API OpenWeatherMap manquante.")
+        return {}
+    
+    # Déterminer si location est une ville ou des coordonnées
+    if isinstance(location, str):
+        # C'est une ville
+        url = f"https://api.openweathermap.org/data/2.5/weather"
+        params = {
+            "q": location,
+            "appid": api_key,
+            "units": openweathermap_config.get("units", "metric"),
+            "lang": openweathermap_config.get("lang", "fr")
+        }
+    else:
+        # Ce sont des coordonnées (lat, lon)
+        lat, lon = location
+        url = f"https://api.openweathermap.org/data/2.5/weather"
+        params = {
+            "lat": lat,
+            "lon": lon,
+            "appid": api_key,
+            "units": openweathermap_config.get("units", "metric"),
+            "lang": openweathermap_config.get("lang", "fr")
+        }
+    
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        session = create_session_with_retry()
+        response = session.get(url, params=params, headers=headers)
+        response.raise_for_status()
+        data = response.json()
+        
+        return {
+            "Température": (data["main"]["temp"], "°C"),
+            "Humidité": (data["main"]["humidity"], "%"),
+            "Pression": (data["main"]["pressure"], "hPa"),
+            "Conditions": (data["weather"][0]["description"], ""),
+            "Vent": (data["wind"]["speed"], "m/s"),
+            "Coordonnées": (f"{data['coord']['lat']}, {data['coord']['lon']}", "")
+        }
+    except Exception as e:
+        if isinstance(e, requests.exceptions.RequestException):
+            if 'WinError 10013' in str(e):
+                print(f"Erreur d'autorisation réseau: {e}. Essayez d'exécuter l'application en tant qu'administrateur.")
+            else:
+                print(f"Erreur lors de la récupération des données météo: {e}")
+        return {}
+
+def get_air_quality_data(lat, lon, config=None):
+    """Récupère les données de qualité de l'air via OpenWeatherMap."""
+    if not config:
+        config = load_api_config()
+    
+    openweathermap_config = config.get("openweathermap", {})
+    api_key = openweathermap_config.get("api_key")
+    
+    if not api_key:
+        print("Erreur: Clé API OpenWeatherMap manquante.")
+        return {}
+    
+    url = f"https://api.openweathermap.org/data/2.5/air_pollution"
+    params = {"lat": lat, "lon": lon, "appid": api_key}
+    
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        session = create_session_with_retry()
+        response = session.get(url, params=params, headers=headers)
+        response.raise_for_status()
+        data = response.json()
+        
+        aqi_levels = ["Bon", "Acceptable", "Modéré", "Mauvais", "Très mauvais"]
+        aqi = data['list'][0]['main']['aqi']
+        
+        return {
+            "PM2.5": (data["list"][0]["components"]["pm2_5"], "μg/m³"),
+            "PM10": (data["list"][0]["components"]["pm10"], "μg/m³"),
+            "NO2": (data["list"][0]["components"]["no2"], "μg/m³"),
+            "O3": (data["list"][0]["components"]["o3"], "μg/m³"),
+            "CO": (data["list"][0]["components"]["co"], "μg/m³"),
+            "SO2": (data["list"][0]["components"]["so2"], "μg/m³"),
+            "Indice qualité air": (aqi, f"{aqi_levels[aqi-1]}")
+        }
+    except Exception as e:
+        if isinstance(e, requests.exceptions.RequestException):
+            if 'WinError 10013' in str(e):
+                print(f"Erreur d'autorisation réseau: {e}. Essayez d'exécuter l'application en tant qu'administrateur.")
+            else:
+                print(f"Erreur lors de la récupération des données de qualité de l'air: {e}")
+        return {}
+
+def get_soil_data(lat, lon, config=None):
+    """Récupère les données du sol via SoilGrids."""
+    url = "https://rest.isric.org/soilgrids/v2.0/properties/query"
+    params = {
+        "lon": lon,
+        "lat": lat,
+        "property": ["phh2o", "soc", "clay", "sand"],  # pH, carbone organique, argile, sable
+        "depth": "0-5cm",
+        "value": "mean"
+    }
+    
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        session = create_session_with_retry()
+        response = session.get(url, params=params, headers=headers)
+        response.raise_for_status()
+        data = response.json()
+        
+        results = {}
+        
+        # Extraire le pH du sol
+        if "properties" in data and "layers" in data["properties"]:
+            for layer in data["properties"]["layers"]:
+                if layer["name"] == "phh2o":
+                    ph_value = layer["depths"][0]["values"].get("mean")
+                    if ph_value is not None:
+                        ph = ph_value / 10  # Diviser par 10 pour obtenir le pH réel
+                        results["pH sol"] = (round(ph, 2), "")
+                
+                elif layer["name"] == "soc":
+                    soc_value = layer["depths"][0]["values"].get("mean")
+                    if soc_value is not None:
+                        soc = soc_value / 10  # g/kg
+                        results["Carbone organique"] = (round(soc, 2), "g/kg")
+                
+                elif layer["name"] == "clay":
+                    clay_value = layer["depths"][0]["values"].get("mean")
+                    if clay_value is not None:
+                        clay = clay_value  # %
+                        results["Argile"] = (round(clay, 2), "%")
+                
+                elif layer["name"] == "sand":
+                    sand_value = layer["depths"][0]["values"].get("mean")
+                    if sand_value is not None:
+                        sand = sand_value  # %
+                        results["Sable"] = (round(sand, 2), "%")
+        
+        return results
+    except Exception as e:
+        if isinstance(e, requests.exceptions.RequestException):
+            if 'WinError 10013' in str(e):
+                print(f"Erreur d'autorisation réseau: {e}. Essayez d'exécuter l'application en tant qu'administrateur.")
+            else:
+                print(f"Erreur lors de la récupération des données du sol: {e}")
+        return {}
+
+def get_nearby_features(lat, lon, radius=5000, config=None):
+    """Récupère les caractéristiques environnementales à proximité via OpenStreetMap."""
+    overpass_url = "http://overpass-api.de/api/interpreter"
+    
+    # Requête Overpass pour obtenir les points d'eau, espaces verts, habitations et zones industrielles
+    query = f"""
+    [out:json];
+    (
+      node(around:{radius},{lat},{lon})[natural=water];
+      way(around:{radius},{lat},{lon})[natural=water];
+      relation(around:{radius},{lat},{lon})[natural=water];
+      
+      node(around:{radius},{lat},{lon})[leisure=park];
+      way(around:{radius},{lat},{lon})[leisure=park];
+      relation(around:{radius},{lat},{lon})[leisure=park];
+      
+      node(around:{radius},{lat},{lon})[building=residential];
+      way(around:{radius},{lat},{lon})[building=residential];
+      
+      node(around:{radius},{lat},{lon})[landuse=industrial];
+      way(around:{radius},{lat},{lon})[landuse=industrial];
+      relation(around:{radius},{lat},{lon})[landuse=industrial];
+    );
+    out count;
+    """
+    
+    try:
+        session = create_session_with_retry()
+        response = session.get(overpass_url, params={'data': query})
+        response.raise_for_status()
+        data = response.json()
+        
+        # Compter les éléments par type
+        water_count = 0
+        park_count = 0
+        residential_count = 0
+        industrial_count = 0
+        
+        for element in data.get("elements", []):
+            tags = element.get("tags", {})
+            
+            if element.get("type") == "count":
+                if "natural=water" in tags:
+                    water_count = tags.get("total", 0)
+                elif "leisure=park" in tags:
+                    park_count = tags.get("total", 0)
+                elif "building=residential" in tags:
+                    residential_count = tags.get("total", 0)
+                elif "landuse=industrial" in tags:
+                    industrial_count = tags.get("total", 0)
+        
+        return {
+            "Points d'eau": (water_count, f"dans un rayon de {radius/1000} km"),
+            "Espaces verts": (park_count, f"dans un rayon de {radius/1000} km"),
+            "Habitations": (residential_count, f"dans un rayon de {radius/1000} km"),
+            "Zones industrielles": (industrial_count, f"dans un rayon de {radius/1000} km")
+        }
+    except Exception as e:
+        if isinstance(e, requests.exceptions.RequestException):
+            if 'WinError 10013' in str(e):
+                print(f"Erreur d'autorisation réseau: {e}. Essayez d'exécuter l'application en tant qu'administrateur.")
+            else:
+                print(f"Erreur lors de la récupération des caractéristiques environnementales: {e}")
+        return {}
+
+def get_world_bank_data(country_code="MA", config=None):
+    """Récupère les données de la Banque mondiale pour un pays."""
+    indicators = {
+        "Population": "SP.POP.TOTL",  # Population totale
+        "Accès à l'eau": "SH.H2O.BASW.ZS",  # % de la population ayant accès à l'eau potable
+        "Émissions CO2": "EN.ATM.CO2E.PC",  # Émissions de CO2 par habitant
+        "Couverture forestière": "AG.LND.FRST.ZS"  # % de terres forestières
+    }
+    
+    results = {}
+    
+    for name, indicator in indicators.items():
+        url = f"http://api.worldbank.org/v2/country/{country_code}/indicator/{indicator}"
+        params = {"format": "json", "per_page": 1, "mrnev": 1}  # Obtenir la valeur la plus récente
+        
+        try:
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+            session = create_session_with_retry()
+            response = session.get(url, params=params, headers=headers)
+            response.raise_for_status()
+            data = response.json()
+            
+            if len(data) > 1 and data[1] and len(data[1]) > 0:
+                value = data[1][0].get("value")
+                if value is not None:
+                    if name == "Population":
+                        results[name] = (int(value), "habitants")
+                    elif name == "Accès à l'eau" or name == "Couverture forestière":
+                        results[name] = (float(value), "%")
+                    elif name == "Émissions CO2":
+                        results[name] = (float(value), "tonnes/habitant")
+        except Exception as e:
+            print(f"Erreur lors de la récupération des données de la Banque mondiale pour {name}: {e}")
+    
+    return results
+
+# Fonction principale pour collecter toutes les données
+def collect_environmental_data(location, country_code="MA", radius=5000):
+    """Collecte toutes les données environnementales pour une localisation donnée."""
+    config = load_api_config()
+    
+    # Obtenir les coordonnées si nécessaire
+    lat, lon = None, None
+    if isinstance(location, str):
+        lat, lon = get_coordinates(location, country_code, config)
+        if lat is None or lon is None:
+            print(f"Impossible de trouver les coordonnées pour {location}")
+            return {}
+    else:
+        lat, lon = location
+    
+    # Collecter les données de toutes les API
+    data = {}
+    
+    # Données météo
+    weather_data = get_weather_data((lat, lon), config)
+    data.update(weather_data)
+    
+    # Données de qualité de l'air
+    air_data = get_air_quality_data(lat, lon, config)
+    data.update(air_data)
+    
+    # Données du sol
+    soil_data = get_soil_data(lat, lon, config)
+    data.update(soil_data)
+    
+    # Caractéristiques environnementales à proximité
+    nearby_data = get_nearby_features(lat, lon, radius, config)
+    data.update(nearby_data)
+    
+    # Données de la Banque mondiale
+    wb_data = get_world_bank_data(country_code, config)
+    data.update(wb_data)
+    
+    return data
+
+# Fonction pour exporter les données vers Excel
+def export_to_excel(data, output_file="donnees_environnementales.xlsx"):
+    """Exporte les données environnementales vers un fichier Excel."""
+    # Créer un DataFrame à partir des données
+    df_data = []
+    
+    for key, value in data.items():
+        if isinstance(value, tuple) and len(value) == 2:
+            val, unit = value
+            df_data.append({"Paramètre": key, "Valeur": val, "Unité": unit})
+        else:
+            df_data.append({"Paramètre": key, "Valeur": value, "Unité": ""})
+    
+    df = pd.DataFrame(df_data)
+    
+    # Créer un writer Excel
+    writer = pd.ExcelWriter(output_file, engine='openpyxl')
+    
+    # Écrire les données dans une feuille
+    df.to_excel(writer, sheet_name="Données environnementales", index=False)
+    
+    # Ajuster la largeur des colonnes
+    for sheet_name in writer.sheets:
+        worksheet = writer.sheets[sheet_name]
+        for i, col in enumerate(df.columns):
+            max_width = max(df[col].astype(str).map(len).max(), len(col)) + 2
+            # Vérifier que l'index de colonne ne dépasse pas la plage valide (A-Z)
+            if i < 26:  # Colonnes A à Z
+                col_letter = chr(65 + i)
+            else:  # Colonnes AA, AB, etc.
+                col_letter = chr(65 + (i // 26) - 1) + chr(65 + (i % 26))
+            worksheet.column_dimensions[col_letter].width = max_width
+    
+    # Enregistrer le fichier Excel
+    writer.close()
+    
+    print(f"Données exportées avec succès vers {output_file}")
+    return output_file
+
+# Fonction principale
+def main():
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Collecter des données environnementales et les exporter vers Excel.')
+    parser.add_argument('--location', required=True, help='Nom de la localité ou latitude si --longitude est aussi spécifié')
+    parser.add_argument('--longitude', help='Longitude (uniquement si --location contient la latitude)')
+    parser.add_argument('--country', default='MA', help='Code pays (par défaut: MA)')
+    parser.add_argument('--radius', type=int, default=5, help='Rayon de recherche en km (par défaut: 5)')
+    parser.add_argument('--output', help='Nom du fichier Excel de sortie')
+    
+    args = parser.parse_args()
+    
+    # Vérifier si l'argument est une coordonnée ou un nom de ville
+    try:
+        if args.longitude:
+            # Si longitude est spécifié, alors location est une latitude
+            lat = float(args.location)
+            lon = float(args.longitude)
+            location = (lat, lon)
+            location_name = f"coordonnées {lat}, {lon}"
+            country_code = args.country
+            radius = args.radius * 1000
+            output_file = args.output if args.output else f"donnees_coord_{lat}_{lon}_{datetime.now().strftime('%Y%m%d')}.xlsx"
+        else:
+            # Sinon, c'est un nom de ville
+            raise ValueError("Traiter comme un nom de ville")
+    except ValueError:
+        # C'est un nom de ville
+        location = args.location
+        country_code = args.country
+        radius = args.radius * 1000
+        output_file = args.output if args.output else f"donnees_{location.lower().replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.xlsx"
+        location_name = location
+    
+    print(f"Collecte des données environnementales pour {location_name}...")
+    data = collect_environmental_data(location, country_code, radius)
+    
+    if data:
+        export_to_excel(data, output_file)
+    else:
+        print("Aucune donnée n'a pu être collectée.")
+        # Si c'était un nom de ville et que ça a échoué, essayer avec les coordonnées de Rabat
+        if isinstance(location, str) and location.lower() == "rabat":
+            print("Tentative avec les coordonnées de Rabat (34.0209, -6.8416)...")
+            data = collect_environmental_data((34.0209, -6.8416), country_code, radius)
+            if data:
+                export_to_excel(data, output_file)
+            else:
+                print("Échec de la collecte de données même avec les coordonnées.")
+
+if __name__ == "__main__":
+    main()

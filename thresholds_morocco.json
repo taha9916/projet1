@@ -1,0 +1,100 @@
+{
+  "air": {
+    "pm25": {
+      "low": 12,
+      "medium": 35,
+      "high": 35
+    },
+    "pm10": {
+      "low": 20,
+      "medium": 50,
+      "high": 50
+    },
+    "no2": {
+      "low": 40,
+      "medium": 200,
+      "high": 200
+    },
+    "o3": {
+      "low": 100,
+      "medium": 180,
+      "high": 180
+    },
+    "indice_qualite_air": {
+      "low": 2,
+      "medium": 3,
+      "high": 5
+    }
+  },
+  "water": {
+    "humidite": {
+      "low": 30,
+      "medium": 80,
+      "high": 80
+    },
+    "points_eau_proximite": {
+      "low": 0,
+      "medium": 5,
+      "high": 5
+    }
+  },
+  "soil": {
+    "ph_sol": {
+      "low_min": 6.0,
+      "low_max": 8.0,
+      "medium_min": 5.5,
+      "medium_max": 8.5,
+      "high_min": 0,
+      "high_max": 14
+    },
+    "carbone_organique": {
+      "low": 2,
+      "medium": 1,
+      "high": 0
+    },
+    "argile": {
+      "low": 20,
+      "medium": 40,
+      "high": 40
+    },
+    "sable": {
+      "low": 40,
+      "medium": 70,
+      "high": 70
+    }
+  },
+  "human": {
+    "habitations_proximite": {
+      "low": 10,
+      "medium": 100,
+      "high": 100
+    },
+    "zones_industrielles_proximite": {
+      "low": 0,
+      "medium": 5,
+      "high": 5
+    },
+    "population_pays": {
+      "low": 10000000,
+      "medium": 50000000,
+      "high": 50000000
+    },
+    "acces_eau": {
+      "low": 80,
+      "medium": 50,
+      "high": 0
+    },
+    "couverture_forestiere": {
+      "low": 30,
+      "medium": 10,
+      "high": 0
+    }
+  },
+  "risk_levels": {
+    "global": {
+      "low": 3.5,
+      "medium": 6.5,
+      "high": 10
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "84430c83",
+  "name": "test1",
+  "description": "",
+  "location": "",
+  "created_at": "2025-08-26T13:27:17.698121",
+  "last_modified": "2025-08-26T13:27:17.698121",
+  "analyses": [],
+  "parameters": [],
+  "metadata": {
+    "total_analyses": 0,
+    "total_parameters": 0,
+    "last_analysis_date": null
+  }
+}

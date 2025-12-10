@@ -1,0 +1,60 @@
+{
+  "pre_construction": {
+    "title": "Pré-construction",
+    "description": "Évaluation des impacts, études environnementales, planification",
+    "parameters": [
+      "Étude d'impact environnemental",
+      "Plan de gestion des déchets",
+      "Évaluation des risques",
+      "Consultation publique",
+      "Permis environnementaux",
+      "Baseline environnementale"
+    ],
+    "color": "#3498db",
+    "icon": "📋"
+  },
+  "construction": {
+    "title": "Construction",
+    "description": "Suivi des déchets, gestion des eaux usées, bruit",
+    "parameters": [
+      "Suivi des émissions atmosphériques",
+      "Gestion des eaux pluviales",
+      "Contrôle du bruit",
+      "Gestion des déchets de chantier",
+      "Protection de la biodiversité",
+      "Mesures anti-poussière"
+    ],
+    "color": "#e67e22",
+    "icon": "🏗️"
+  },
+  "exploitation": {
+    "title": "Exploitation",
+    "description": "Système de surveillance continue, mesures de conformité, rapports réguliers",
+    "parameters": [
+      "Système de Surveillance Continue Implémenté",
+      "Mesures de conformité réglementaire",
+      "Rapports annuels de surveillance",
+      "Monitoring des émissions",
+      "Suivi de la qualité de l'eau",
+      "Contrôle des impacts sur la biodiversité",
+      "Gestion des incidents environnementaux",
+      "Audits environnementaux périodiques"
+    ],
+    "color": "#27ae60",
+    "icon": "⚡"
+  },
+  "demantellement": {
+    "title": "Démantèlement",
+    "description": "Dépollution, remise en état, suivi post-démantèlement",
+    "parameters": [
+      "Plan de démantèlement",
+      "Dépollution des sols",
+      "Remise en état du site",
+      "Suivi post-démantèlement",
+      "Gestion des déchets dangereux",
+      "Restauration écologique"
+    ],
+    "color": "#8e44ad",
+    "icon": "🔄"
+  }
+}

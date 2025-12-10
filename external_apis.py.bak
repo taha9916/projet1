@@ -1,0 +1,1557 @@
+import requests
+import json
+import logging
+import os
+import math
+import pandas as pd
+from config import OUTPUT_DIR
+
+# Initialiser le logging pour ce module
+logger = logging.getLogger(__name__)
+
+# Configuration par défaut des API externes
+DEFAULT_EXTERNAL_API_CONFIG = {
+    # OpenWeatherMap API
+    "openweathermap": {
+        "api_key": "",  # À remplir avec votre clé API
+        "api_url": "https://api.openweathermap.org/data/2.5/",
+        "units": "metric",  # Unités métriques (Celsius, m/s, etc.)
+        "lang": "fr",  # Langue française
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # OpenWeatherMap Air Pollution API
+    "openweathermap_air_pollution": {
+        "api_key": "",  # À remplir avec votre clé API
+        "api_url": "https://api.openweathermap.org/data/2.5/air_pollution",
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # SoilGrids API
+    "soilgrids": {
+        "api_url": "https://rest.isric.org/soilgrids/v2.0/",
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # INSEE API
+    "insee": {
+        "api_key": "",  # À remplir avec votre clé API
+        "api_secret": "",  # À remplir avec votre secret API
+        "api_url": "https://api.insee.fr/",
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # Banque Mondiale API
+    "worldbank": {
+        "api_url": "https://api.worldbank.org/v2/",
+        "format": "json",
+        "country": "MA",  # Code pays pour le Maroc
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # OpenStreetMap / Overpass API
+    "openstreetmap": {
+        "api_url": "https://overpass-api.de/api/interpreter",
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # Copernicus Climate Data Store API
+    "copernicus": {
+        "api_key": "",  # À remplir avec votre clé API
+        "api_url": "https://cds.climate.copernicus.eu/api/v2/",
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # Global Biodiversity Information Facility (GBIF) API
+    "gbif": {
+        "api_url": "https://api.gbif.org/v1/",
+        "enabled": True  # Activer/désactiver cette API
+    },
+    # NASA Earth Data API
+    "nasa": {
+        "api_key": "",  # À remplir avec votre clé API NASA
+        "api_url": "https://api.nasa.gov/",
+        "enabled": True  # Activer/désactiver cette API
+    }
+}
+
+# Charger les configurations depuis le fichier external_api_config.json
+def load_external_api_config():
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "external_api_config.json")
+    config = DEFAULT_EXTERNAL_API_CONFIG.copy()
+    
+    if os.path.exists(config_path):
+        try:
+            with open(config_path, 'r', encoding='utf-8') as f:
+                saved_config = json.load(f)
+                
+                # Mettre à jour la configuration avec les valeurs sauvegardées
+                for provider in config.keys():
+                    if provider in saved_config:
+                        for key, value in saved_config[provider].items():
+                            if key in config[provider]:
+                                config[provider][key] = value
+                                
+            logger.info("Configurations des API externes chargées avec succès depuis external_api_config.json")
+        except Exception as e:
+            logger.error(f"Erreur lors du chargement des configurations API externes: {str(e)}")
+    else:
+        logger.warning("Fichier external_api_config.json non trouvé, utilisation des configurations par défaut")
+    
+    return config
+
+# Charger les configurations au démarrage
+EXTERNAL_API_CONFIG = load_external_api_config()
+
+class ExternalAPIs:
+    """Classe pour interagir avec différentes API externes pour collecter des données environnementales."""
+    
+    def __init__(self):
+        """Initialise les API externes."""
+        self.config = EXTERNAL_API_CONFIG
+    
+    def get_weather_data(self, lat, lon):
+        """Récupère les données météorologiques pour des coordonnées données via OpenWeatherMap.
+        
+        Args:
+            lat (float): Latitude
+            lon (float): Longitude
+            
+        Returns:
+            dict: Données météorologiques ou None en cas d'erreur
+        """
+        try:
+            api_key = self.config["openweathermap"]["api_key"]
+            url = "https://api.openweathermap.org/data/2.5/weather"
+            params = {
+                "lat": lat,
+                "lon": lon,
+                "appid": api_key,
+                "units": "metric",
+                "lang": "fr"
+            }
+            response = requests.get(url, params=params, timeout=10)
+            if response.status_code != 200:
+                logger.warning(f"Météo: {response.status_code} - {response.text}")
+                return None
+
+            data = response.json()
+
+            # ✅ Extraction correcte des données
+            return {
+                "Température": (data["main"]["temp"], "°C"),
+                "Humidité": (data["main"]["humidity"], "%"),
+                "Pression": (data["main"]["pressure"], "hPa"),
+                "Vent": (data["wind"]["speed"], "m/s"),
+                "Ciel": (data["weather"][0]["description"], "")
+            }
+        except Exception as e:
+            logger.error(f"Erreur météo: {e}")
+            return None
+
+    
+    def get_air_quality_data(self, lat, lon):
+        """Récupère les données de qualité de l'air pour des coordonnées données via OpenWeatherMap Air Pollution.
+        
+        Args:
+            lat (float): Latitude
+            lon (float): Longitude
+            
+        Returns:
+            dict: Données de qualité de l'air ou None en cas d'erreur
+        """
+        try:
+            api_key = self.config["openweathermap"]["api_key"]
+            url = "https://api.openweathermap.org/data/2.5/air_pollution"
+            params = {
+                "lat": lat,
+                "lon": lon,
+                "appid": api_key
+            }
+            response = requests.get(url, params=params, timeout=10)
+            if response.status_code != 200:
+                logger.warning(f"Air: {response.status_code} - {response.text}")
+                return None
+
+            data = response.json()["list"][0]["components"]
+
+            return {
+                "AQI": (response.json()["list"][0]["main"]["aqi"], ""),
+                "PM2.5": (data["pm2_5"], "µg/m³"),
+                "PM10": (data["pm10"], "µg/m³"),
+                "NO₂": (data["no2"], "µg/m³"),
+                "SO₂": (data["so2"], "µg/m³"),
+                "CO": (data["co"], "µg/m³")
+            }
+        except Exception as e:
+            logger.error(f"Erreur air: {e}")
+            return None
+
+    
+    def _interpret_aqi(self, aqi):
+        """Interprète l'indice de qualité de l'air selon les normes US EPA.
+        
+        Args:
+            aqi (int): Indice de qualité de l'air (AQI US)
+            
+        Returns:
+            str: Interprétation de l'AQI
+        """
+        if aqi <= 50:
+            return "Bon - La qualité de l'air est satisfaisante et la pollution présente peu ou pas de risque"
+        elif aqi <= 100:
+            return "Modéré - La qualité de l'air est acceptable, mais peut présenter un risque pour certaines personnes sensibles"
+        elif aqi <= 150:
+            return "Malsain pour les groupes sensibles - Les personnes sensibles peuvent subir des effets sur la santé"
+        elif aqi <= 200:
+            return "Malsain - Tout le monde peut commencer à ressentir des effets sur la santé"
+        elif aqi <= 300:
+            return "Très malsain - Avertissements sanitaires, tout le monde peut subir des effets plus graves"
+        else:
+            return "Dangereux - Alerte sanitaire: tout le monde peut subir des effets graves sur la santé"
+    
+    def _describe_pollutant(self, pollutant):
+        """Fournit une description du polluant principal.
+        
+        Args:
+            pollutant (str): Code du polluant principal
+            
+        Returns:
+            str: Description du polluant
+        """
+        descriptions = {
+            # Anciens codes AirVisual
+            "p2": "PM2.5 - Particules fines de diamètre inférieur à 2,5 micromètres, dangereuses car elles pénètrent profondément dans les poumons",
+            "p1": "PM10 - Particules de diamètre inférieur à 10 micromètres, pouvant causer des problèmes respiratoires",
+            "o3": "Ozone (O3) - Polluant secondaire formé par réaction photochimique, irritant pour les voies respiratoires",
+            "n2": "Dioxyde d'azote (NO2) - Gaz irritant produit principalement par la combustion, affecte le système respiratoire",
+            "s2": "Dioxyde de soufre (SO2) - Gaz irritant produit par la combustion de combustibles fossiles, cause des problèmes respiratoires",
+            "co": "Monoxyde de carbone (CO) - Gaz toxique inodore produit par combustion incomplète, réduit la capacité du sang à transporter l'oxygène",
+            
+            # Nouveaux codes OpenWeatherMap
+            "PM2.5": "PM2.5 - Particules fines de diamètre inférieur à 2,5 micromètres, dangereuses car elles pénètrent profondément dans les poumons",
+            "PM10": "PM10 - Particules de diamètre inférieur à 10 micromètres, pouvant causer des problèmes respiratoires",
+            "O3": "Ozone (O3) - Polluant secondaire formé par réaction photochimique, irritant pour les voies respiratoires",
+            "NO2": "Dioxyde d'azote (NO2) - Gaz irritant produit principalement par la combustion, affecte le système respiratoire",
+            "SO2": "Dioxyde de soufre (SO2) - Gaz irritant produit par la combustion de combustibles fossiles, cause des problèmes respiratoires",
+            "CO": "Monoxyde de carbone (CO) - Gaz toxique inodore produit par combustion incomplète, réduit la capacité du sang à transporter l'oxygène"
+        }
+        
+        return descriptions.get(pollutant, f"Polluant inconnu: {pollutant}")
+    
+    def get_soil_data(self, lat, lon, properties=None, depth="0-5cm"):
+        """
+        Récupère plusieurs propriétés du sol via SoilGrids en utilisant l'endpoint properties/query.
+        Si cet endpoint échoue, essaie l'endpoint classification/query comme solution de secours.
+
+        Args:
+            lat (float): Latitude.
+            lon (float): Longitude.
+            properties (list, optional): Liste des propriétés SoilGrids à récupérer. 
+                                     Par défaut: ["phh2o", "clay", "sand", "soc", "bdod"].
+            depth (str, optional): Profondeur d'analyse. Par défaut: "0-5cm".
+
+        Returns:
+            dict: Dictionnaire avec les noms de paramètres normalisés et leurs valeurs.
+        """
+        if properties is None:
+            properties = ["phh2o", "clay", "sand", "soc", "bdod"]
+
+        # 🔧 Arrondir les coordonnées pour éviter les erreurs
+        try:
+            lat = round(float(lat), 6)
+            lon = round(float(lon), 6)
+        except (TypeError, ValueError) as e:
+            logger.error(f"SoilGrids: Erreur de conversion des coordonnées - {str(e)}")
+            return {}
+
+        # Normalisation des noms de paramètres et unités
+        PROPERTY_MAP = {
+            "phh2o": ("pH du sol", "pH"),
+            "clay": ("Teneur en argile", "%"),
+            "sand": ("Teneur en sable", "%"),
+            "soc": ("Carbone organique du sol", "g/kg"),
+            "bdod": ("Densité apparente", "kg/dm³")
+        }
+
+        # Initialiser le dictionnaire de résultats
+        soil_data = {}
+        for prop_code in properties:
+            norm_name, unit = PROPERTY_MAP.get(prop_code, (prop_code, ""))
+            soil_data[norm_name] = ("N/A", unit)
+
+        try:
+            # 🛑 Ajouter un délai pour ne pas surcharger le serveur
+            import time
+            time.sleep(1)
+            
+            # Essayer d'abord l'endpoint properties/query pour obtenir les valeurs exactes
+            properties_url = "https://rest.isric.org/soilgrids/v2.0/properties/query"
+            properties_params = {
+                "lon": lon,
+                "lat": lat,
+                "property": properties,
+                "depth": depth,
+                "value": "mean"
+            }
+            
+            logger.info(f"SoilGrids: Tentative d'utilisation de l'endpoint properties/query avec {properties_params}")
+            properties_response = requests.get(properties_url, params=properties_params, timeout=15)
+            
+            # Si l'endpoint properties/query fonctionne, utiliser les valeurs exactes
+            if properties_response.status_code == 200:
+                logger.info("SoilGrids: Endpoint properties/query a réussi, utilisation des valeurs exactes")
+                data = properties_response.json()
+                
+                if "properties" in data and "layers" in data["properties"]:
+                    for layer in data["properties"]["layers"]:
+                        prop_name = layer["name"]
+                        if prop_name in properties and "depths" in layer and len(layer["depths"]) > 0:
+                            mean_value = layer["depths"][0]["values"].get("mean")
+                            if mean_value is not None:
+                                # Appliquer les facteurs de conversion si nécessaire
+                                if prop_name == "phh2o":
+                                    mean_value = mean_value / 10  # Convertir en pH réel
+                                
+                                norm_name, unit = PROPERTY_MAP.get(prop_name, (prop_name, ""))
+                                soil_data[norm_name] = (str(round(mean_value, 2)), unit)
+                                logger.info(f"SoilGrids: Valeur exacte pour {prop_name}: {mean_value} {unit}")
+                
+                return soil_data
+            else:
+                logger.warning(f"SoilGrids: L'endpoint properties/query a échoué avec le code {properties_response.status_code}. Utilisation de l'endpoint classification/query comme solution de secours.")
+            
+            # Si l'endpoint properties/query échoue, utiliser l'endpoint classification/query comme solution de secours
+            url = "https://rest.isric.org/soilgrids/v2.0/classification/query"
+            params = {
+                "lon": lon,
+                "lat": lat,
+                "number_classes": 5  # Obtenir les 5 classes de sol les plus probables
+            }
+            
+            response = requests.get(url, params=params, timeout=10)
+            
+            # 🔍 Vérifier le code de statut
+            if response.status_code != 200:
+                logger.error(f"SoilGrids: {response.status_code} - {response.text}")
+                return soil_data
+
+            data = response.json()
+            
+            # Déboguer la structure de la réponse
+            logger.info(f"SoilGrids: Structure de la réponse: {json.dumps(data, indent=2)[:500]}...")
+
+            # Extraire la classification du sol et les probabilités
+            soil_class = None
+            soil_class_probability = 0
+            soil_classes_info = []
+
+            if "wrb_class_name" in data:
+                soil_class = data.get("wrb_class_name")
+                soil_class_probability = data.get("wrb_class_probability", 0)
+                logger.info(f"SoilGrids: Classe de sol principale: {soil_class} (probabilité: {soil_class_probability})")
+                
+                # Collecter les informations sur toutes les classes de sol
+                if "wrb_class_value" in data and "wrb_class_probability" in data:
+                    soil_classes_info.append({
+                        "class": soil_class,
+                        "probability": soil_class_probability
+                    })
+                
+                # Collecter les informations sur les classes alternatives
+                if "wrb_class_value_other" in data and "wrb_class_probability_other" in data:
+                    other_classes = data.get("wrb_class_name_other", [])
+                    other_probs = data.get("wrb_class_probability_other", [])
+                    
+                    for i in range(min(len(other_classes), len(other_probs))):
+                        soil_classes_info.append({
+                            "class": other_classes[i],
+                            "probability": other_probs[i]
+                        })
+                        logger.info(f"SoilGrids: Classe alternative {i+1}: {other_classes[i]} (probabilité: {other_probs[i]})")
+                
+                # Estimer les propriétés du sol en fonction de la classification
+                estimated_properties = self._estimate_soil_properties(soil_class, soil_classes_info)
+                
+                # Mettre à jour soil_data avec les estimations, mais indiquer qu'il s'agit d'estimations
+                for prop_code in properties:
+                    if prop_code in estimated_properties:
+                        norm_name, unit = PROPERTY_MAP.get(prop_code, (prop_code, ""))
+                        value = estimated_properties[prop_code]
+                        soil_data[norm_name] = (f"{value} (estimé)", unit)
+                        logger.info(f"SoilGrids: Valeur estimée pour {prop_code}: {value} {unit}")
+            else:
+                logger.warning("SoilGrids: Classification du sol non trouvée dans la réponse")
+            
+            return soil_data
+
+        except requests.exceptions.Timeout:
+            logger.error("SoilGrids: Timeout après 10 secondes")
+        except requests.exceptions.ConnectionError:
+            logger.error("SoilGrids: Problème de connexion au serveur")
+        except Exception as e:
+            logger.error(f"SoilGrids: Erreur inattendue - {str(e)}")
+        
+        return soil_data
+        
+    def _estimate_soil_properties(self, soil_class, soil_classes_info):
+        """
+        Estime les propriétés du sol en fonction de la classification WRB.
+        
+        Args:
+            soil_class (str): Classe de sol principale selon WRB.
+            soil_classes_info (list): Liste des classes de sol avec leurs probabilités.
+            
+        Returns:
+            dict: Propriétés estimées du sol.
+        """
+        # Valeurs par défaut pour les différentes classes de sol
+        # Ces valeurs sont des estimations basées sur la littérature scientifique
+        soil_properties_by_class = {
+            "Acrisols": {"phh2o": 5.2, "clay": 35, "sand": 40, "soc": 15, "bdod": 1.3},
+            "Alisols": {"phh2o": 4.8, "clay": 40, "sand": 30, "soc": 20, "bdod": 1.2},
+            "Andosols": {"phh2o": 6.0, "clay": 15, "sand": 45, "soc": 80, "bdod": 0.8},
+            "Arenosols": {"phh2o": 6.5, "clay": 5, "sand": 90, "soc": 5, "bdod": 1.5},
+            "Calcisols": {"phh2o": 8.0, "clay": 25, "sand": 50, "soc": 10, "bdod": 1.4},
+            "Cambisols": {"phh2o": 6.5, "clay": 25, "sand": 40, "soc": 20, "bdod": 1.3},
+            "Chernozems": {"phh2o": 7.0, "clay": 30, "sand": 35, "soc": 60, "bdod": 1.2},
+            "Cryosols": {"phh2o": 6.0, "clay": 20, "sand": 45, "soc": 40, "bdod": 1.1},
+            "Durisols": {"phh2o": 7.5, "clay": 30, "sand": 45, "soc": 8, "bdod": 1.5},
+            "Ferralsols": {"phh2o": 5.5, "clay": 60, "sand": 20, "soc": 25, "bdod": 1.2},
+            "Fluvisols": {"phh2o": 6.8, "clay": 25, "sand": 40, "soc": 30, "bdod": 1.3},
+            "Gleysols": {"phh2o": 6.0, "clay": 35, "sand": 30, "soc": 40, "bdod": 1.2},
+            "Gypsisols": {"phh2o": 7.8, "clay": 20, "sand": 60, "soc": 5, "bdod": 1.4},
+            "Histosols": {"phh2o": 5.5, "clay": 10, "sand": 20, "soc": 200, "bdod": 0.3},
+            "Kastanozems": {"phh2o": 7.2, "clay": 30, "sand": 40, "soc": 40, "bdod": 1.3},
+            "Leptosols": {"phh2o": 6.5, "clay": 20, "sand": 50, "soc": 15, "bdod": 1.4},
+            "Lixisols": {"phh2o": 6.0, "clay": 30, "sand": 45, "soc": 10, "bdod": 1.4},
+            "Luvisols": {"phh2o": 6.5, "clay": 35, "sand": 30, "soc": 20, "bdod": 1.3},
+            "Nitisols": {"phh2o": 5.8, "clay": 50, "sand": 20, "soc": 25, "bdod": 1.2},
+            "Phaeozems": {"phh2o": 6.8, "clay": 30, "sand": 35, "soc": 50, "bdod": 1.2},
+            "Planosols": {"phh2o": 6.0, "clay": 40, "sand": 30, "soc": 15, "bdod": 1.4},
+            "Plinthosols": {"phh2o": 5.5, "clay": 45, "sand": 30, "soc": 15, "bdod": 1.3},
+            "Podzols": {"phh2o": 4.5, "clay": 10, "sand": 80, "soc": 30, "bdod": 1.3},
+            "Regosols": {"phh2o": 6.5, "clay": 15, "sand": 60, "soc": 10, "bdod": 1.4},
+            "Solonchaks": {"phh2o": 8.5, "clay": 30, "sand": 45, "soc": 10, "bdod": 1.4},
+            "Solonetz": {"phh2o": 8.0, "clay": 35, "sand": 40, "soc": 15, "bdod": 1.4},
+            "Stagnosols": {"phh2o": 6.0, "clay": 40, "sand": 25, "soc": 30, "bdod": 1.3},
+            "Technosols": {"phh2o": 7.0, "clay": 20, "sand": 50, "soc": 20, "bdod": 1.3},
+            "Umbrisols": {"phh2o": 5.5, "clay": 25, "sand": 45, "soc": 50, "bdod": 1.1},
+            "Vertisols": {"phh2o": 7.0, "clay": 60, "sand": 15, "soc": 25, "bdod": 1.3}
+        }
+        
+        # Valeurs par défaut si la classe de sol n'est pas reconnue
+        default_properties = {"phh2o": 6.5, "clay": 25, "sand": 40, "soc": 20, "bdod": 1.3}
+        
+        # Si la classe de sol principale est reconnue, utiliser ses valeurs
+        if soil_class in soil_properties_by_class:
+            return soil_properties_by_class[soil_class]
+        
+        # Si la classe principale n'est pas reconnue mais qu'il y a des classes alternatives
+        if soil_classes_info and len(soil_classes_info) > 0:
+            # Calculer une moyenne pondérée des propriétés en fonction des probabilités
+            weighted_properties = {"phh2o": 0, "clay": 0, "sand": 0, "soc": 0, "bdod": 0}
+            total_probability = 0
+            
+            for class_info in soil_classes_info:
+                class_name = class_info.get("class")
+                probability = class_info.get("probability", 0)
+                
+                if class_name in soil_properties_by_class and probability > 0:
+                    for prop, value in soil_properties_by_class[class_name].items():
+                        weighted_properties[prop] += value * probability
+                    total_probability += probability
+            
+            # Si au moins une classe reconnue a été trouvée
+            if total_probability > 0:
+                for prop in weighted_properties:
+                    weighted_properties[prop] = round(weighted_properties[prop] / total_probability, 2)
+                return weighted_properties
+        
+        # Si aucune classe reconnue n'a été trouvée, utiliser les valeurs par défaut
+        logger.warning(f"SoilGrids: Classe de sol '{soil_class}' non reconnue, utilisation des valeurs par défaut")
+        return default_properties
+    
+    def _interpret_clay_content(self, clay_percentage):
+        """Interprète la teneur en argile du sol.
+        
+        Args:
+            clay_percentage (float): Pourcentage d'argile
+            
+        Returns:
+            str: Interprétation de la teneur en argile
+        """
+        # Vérifier si clay_percentage est None avant de faire des comparaisons
+        if clay_percentage is None:
+            return "Teneur moyenne en argile (estimé)"
+            
+        if clay_percentage < 10:
+            return "Sol sableux - Drainage rapide, faible rétention d'eau et de nutriments"
+        elif clay_percentage < 25:
+            return "Sol limoneux - Bon équilibre entre drainage et rétention"
+        elif clay_percentage < 40:
+            return "Sol argileux - Bonne rétention d'eau et de nutriments, mais drainage lent"
+        else:
+            return "Sol très argileux - Forte rétention d'eau, risque de compaction et drainage très lent"
+    
+    def _interpret_organic_carbon(self, soc):
+        """Interprète la teneur en carbone organique du sol.
+        
+        Args:
+            soc (float): Teneur en carbone organique (g/kg)
+            
+        Returns:
+            str: Interprétation de la teneur en carbone organique
+        """
+        # Vérifier si soc est None avant de faire des comparaisons
+        if soc is None:
+            return "Teneur moyenne en carbone organique (estimé)"
+            
+        if soc < 10:
+            return "Très faible - Sol pauvre en matière organique, fertilité réduite"
+        elif soc < 20:
+            return "Faible - Teneur limitée en matière organique"
+        elif soc < 40:
+            return "Moyen - Teneur acceptable en matière organique"
+        elif soc < 60:
+            return "Élevé - Bonne teneur en matière organique, sol fertile"
+        else:
+            return "Très élevé - Sol très riche en matière organique, excellente fertilité"
+    
+    def _interpret_ph(self, ph):
+        """Interprète le pH du sol.
+        
+        Args:
+            ph (float): Valeur du pH
+            
+        Returns:
+            str: Interprétation du pH
+        """
+        # Vérifier si ph est None avant de faire des comparaisons
+        if ph is None:
+            return "pH neutre (estimé)"
+            
+        if ph < 4.5:
+            return "Extrêmement acide - Problèmes de toxicité, disponibilité limitée des nutriments"
+        elif ph < 5.5:
+            return "Très acide - Conditions défavorables pour de nombreuses cultures"
+        elif ph < 6.5:
+            return "Modérément acide - Convient à de nombreuses cultures, surveiller le calcium"
+        elif ph < 7.5:
+            return "Neutre - Conditions optimales pour la plupart des cultures"
+        elif ph < 8.5:
+            return "Modérément alcalin - Peut limiter la disponibilité de certains nutriments"
+        else:
+            return "Très alcalin - Problèmes de disponibilité des nutriments, notamment le phosphore et les micronutriments"
+    
+    def get_insee_data(self, region_code):
+        """Récupère les données statistiques pour une région donnée via l'API INSEE.
+        
+        Args:
+            region_code (str): Code de la région
+            
+        Returns:
+            dict: Données statistiques
+        """
+        try:
+            api_key = self.config["insee"]["api_key"]
+            api_secret = self.config["insee"]["api_secret"]
+            
+            if not api_key or not api_secret:
+                logger.warning("Identifiants API INSEE non configurés")
+                return None
+                
+            base_url = self.config["insee"]["api_url"]
+            
+            # Obtenir un token d'accès
+            token_url = f"{base_url}token"
+            auth = (api_key, api_secret)
+            token_data = {"grant_type": "client_credentials"}
+            
+            token_response = requests.post(token_url, auth=auth, data=token_data)
+            token_response.raise_for_status()
+            
+            access_token = token_response.json()["access_token"]
+            
+            # Construire l'URL de l'API pour les données régionales
+            url = f"{base_url}donnees-locales/v1/regions/{region_code}/statistiques"
+            
+            # Définir les en-têtes avec le token d'accès
+            headers = {"Authorization": f"Bearer {access_token}"}
+            
+            # Effectuer la requête
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            
+            # Convertir la réponse en JSON
+            data = response.json()
+            
+            # Extraire les données pertinentes
+            insee_data = {}
+            
+            for stat in data["statistiques"]:
+                name = stat["libelle"]
+                value = stat["valeur"]
+                unit = stat["unite"] if "unite" in stat else ""
+                insee_data[name] = (value, unit)
+            
+            return insee_data
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération des données INSEE: {str(e)}")
+            return None
+    
+    def get_worldbank_data(self, indicators):
+        """Récupère les données de la Banque Mondiale pour le Maroc.
+        
+        Args:
+            indicators (list): Liste des codes d'indicateurs à récupérer
+            
+        Returns:
+            dict: Données de la Banque Mondiale
+        """
+        try:
+            base_url = self.config["worldbank"]["api_url"]
+            format_type = self.config["worldbank"]["format"]
+            country = self.config["worldbank"]["country"]
+            
+            worldbank_data = {}
+            
+            # Récupérer les données pour chaque indicateur
+            for indicator in indicators:
+                # Construire l'URL de l'API
+                url = f"{base_url}country/{country}/indicator/{indicator}?format={format_type}"
+                
+                # Effectuer la requête
+                response = requests.get(url)
+                response.raise_for_status()
+                
+                # Convertir la réponse en JSON
+                data = response.json()
+                
+                # Extraire les données les plus récentes
+                if len(data) > 1 and len(data[1]) > 0:
+                    latest_data = data[1][0]
+                    indicator_name = latest_data["indicator"]["value"]
+                    value = latest_data["value"]
+                    year = latest_data["date"]
+                    
+                    worldbank_data[indicator_name] = (str(value), year)
+            
+            return worldbank_data
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération des données de la Banque Mondiale: {str(e)}")
+            return None
+    
+    def parse_osm_response(self, data):
+        """Parse la réponse de l'API Overpass pour extraire les informations pertinentes.
+        
+        Args:
+            data (dict): Données JSON de la réponse Overpass
+            
+        Returns:
+            dict: Données structurées avec les comptages par catégorie
+        """
+        try:
+            # Initialiser les compteurs pour les différentes catégories
+            water_bodies = 0
+            green_spaces = 0
+            industrial = 0
+            residential = 0
+            
+            # Parcourir tous les éléments de la réponse
+            for element in data.get("elements", []):
+                # Récupérer les tags de l'élément
+                tags = element.get("tags", {})
+                
+                # Vérifier le type d'élément et incrémenter le compteur approprié
+                if "natural" in tags and tags["natural"] in ["water", "wetland"]:
+                    water_bodies += 1
+                elif "waterway" in tags:
+                    water_bodies += 1
+                elif "leisure" in tags and tags["leisure"] == "park":
+                    green_spaces += 1
+                elif "landuse" in tags:
+                    if tags["landuse"] == "forest":
+                        green_spaces += 1
+                    elif tags["landuse"] == "industrial":
+                        industrial += 1
+                    elif tags["landuse"] == "residential":
+                        residential += 1
+            
+            # Créer le dictionnaire de résultats
+            result = {
+                "water_bodies": str(water_bodies),
+                "green_spaces": str(green_spaces),
+                "industrial": str(industrial),
+                "residential": str(residential)
+            }
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Erreur lors du parsing des données OpenStreetMap: {str(e)}")
+            return {}
+    
+    def get_osm_data(self, lat, lon, radius=5000, tags=None):
+        """Récupère les données OpenStreetMap autour d'un point donné.
+        
+        Args:
+            lat (float): Latitude
+            lon (float): Longitude
+            radius (int): Rayon de recherche en mètres (par défaut 5000m)
+            tags (list): Liste des tags à rechercher (optionnel)
+            
+        Returns:
+            dict: Données OpenStreetMap structurées
+        """
+        try:
+            url = self.config["openstreetmap"]["api_url"]
+            
+            # Requête Overpass optimisée
+            query = f"""
+            [out:json];
+            (
+              way(around:{radius},{lat},{lon})["natural"="water"];
+              way(around:{radius},{lat},{lon})["waterway"];
+              way(around:{radius},{lat},{lon})["landuse"="forest"];
+              node(around:{radius},{lat},{lon})["leisure"="park"];
+              way(around:{radius},{lat},{lon})["leisure"="park"];
+              way(around:{radius},{lat},{lon})["landuse"="industrial"];
+              way(around:{radius},{lat},{lon})["landuse"="residential"];
+            );
+            out center;
+            """
+            
+            # Effectuer la requête
+            response = requests.post(url, data={"data": query}, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            
+            # Parser la réponse avec la nouvelle fonction
+            return self.parse_osm_response(data)
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération des données OpenStreetMap: {str(e)}")
+            return None
+
+    def get_copernicus_data(self, lat, lon):
+        """Récupère les données climatiques via l'API Copernicus Climate Data Store.
+        
+        Args:
+            lat (float): Latitude
+            lon (float): Longitude
+            
+        Returns:
+            dict: Données climatiques
+        """
+        try:
+            api_key = self.config["copernicus"]["api_key"]
+            if not api_key or not self.config["copernicus"]["enabled"]:
+                logger.warning("Clé API Copernicus non configurée ou API désactivée")
+                return None
+                
+            base_url = self.config["copernicus"]["api_url"]
+            
+            # Construire l'URL de l'API pour les données climatiques
+            # Note: Copernicus CDS nécessite généralement une authentification plus complexe
+            # et l'utilisation de leur client Python (cdsapi)
+            # Ceci est une implémentation simplifiée
+            url = f"{base_url}data?latitude={lat}&longitude={lon}&key={api_key}"
+            
+            # Effectuer la requête
+            response = requests.get(url)
+            response.raise_for_status()
+            
+            # Convertir la réponse en JSON
+            data = response.json()
+            
+            # Extraire les données pertinentes
+            climate_data = {
+                "Température moyenne annuelle": (data.get("annual_temperature", 0), "°C"),
+                "Précipitations annuelles": (data.get("annual_precipitation", 0), "mm"),
+                "Jours de chaleur extrême": (data.get("extreme_heat_days", 0), "jours"),
+                "Risque de sécheresse": (data.get("drought_risk", "Moyen"), ""),
+                "Tendance climatique": (data.get("climate_trend", "Stable"), "")
+            }
+            
+            return climate_data
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération des données Copernicus: {str(e)}")
+            return None
+    
+    def get_gbif_data(self, lat, lon, radius=1000):
+        """Récupère les données de biodiversité via l'API GBIF.
+        
+        Args:
+            lat (float): Latitude
+            lon (float): Longitude
+            radius (int): Rayon de recherche en mètres
+            
+        Returns:
+            dict: Données de biodiversité
+        """
+        try:
+            if not self.config["gbif"]["enabled"]:
+                logger.warning("API GBIF désactivée")
+                return None
+                
+            base_url = self.config["gbif"]["api_url"]
+            
+            # Convertir le rayon en degrés (approximation)
+            radius_degrees = radius / 111000  # ~111km par degré à l'équateur
+            
+            # Construire l'URL de l'API pour les occurrences d'espèces
+            url = f"{base_url}occurrence/search?decimalLatitude={lat-radius_degrees},{lat+radius_degrees}&decimalLongitude={lon-radius_degrees},{lon+radius_degrees}&limit=300"
+            
+            # Effectuer la requête
+            response = requests.get(url)
+            response.raise_for_status()
+            
+            # Convertir la réponse en JSON
+            data = response.json()
+            
+            # Compter les espèces par groupe taxonomique
+            species_count = {}
+            endangered_count = 0
+            
+            if "results" in data:
+                for occurrence in data["results"]:
+                    kingdom = occurrence.get("kingdom", "Inconnu")
+                    if kingdom not in species_count:
+                        species_count[kingdom] = 0
+                    species_count[kingdom] += 1
+                    
+                    # Vérifier si l'espèce est menacée (statut IUCN)
+                    if occurrence.get("iucnRedListCategory") in ["VULNERABLE", "ENDANGERED", "CRITICALLY_ENDANGERED"]:
+                        endangered_count += 1
+            
+            # Préparer les données de biodiversité
+            # Calculer la densité faunistique (nombre d'espèces par km²)
+            area_km2 = math.pi * (radius/1000)**2  # Convertir le rayon en km et calculer l'aire du cercle
+            species_density = round(data.get("count", 0) / area_km2, 2) if area_km2 > 0 else 0
+            
+            biodiversity_data = {
+                "Nombre total d'espèces": (data.get("count", 0), "espèces"),
+                "Espèces menacées": (endangered_count, "espèces"),
+                "Densité faunistique": (species_density, "Individus/km²"),
+                "Richesse en biodiversité": (self._interpret_biodiversity_richness(data.get("count", 0)), "")
+            }
+            
+            # Ajouter les comptages par groupe taxonomique
+            for kingdom, count in species_count.items():
+                biodiversity_data[f"Espèces - {kingdom}"] = (count, "espèces")
+            
+            return biodiversity_data
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération des données GBIF: {str(e)}")
+            return None
+    
+    def _interpret_biodiversity_richness(self, species_count):
+        """Interprète la richesse en biodiversité en fonction du nombre d'espèces.
+        
+        Args:
+            species_count (int): Nombre d'espèces
+            
+        Returns:
+            str: Interprétation de la richesse en biodiversité
+        """
+        if species_count < 10:
+            return "Très faible - Zone potentiellement dégradée ou à faible diversité naturelle"
+        elif species_count < 50:
+            return "Faible - Biodiversité limitée"
+        elif species_count < 100:
+            return "Moyenne - Biodiversité modérée"
+        elif species_count < 200:
+            return "Élevée - Zone riche en biodiversité"
+        else:
+            return "Très élevée - Zone exceptionnellement riche en biodiversité, potentiellement sensible"
+    
+    def get_nasa_data(self, lat, lon):
+        """Récupère les données environnementales via les API NASA.
+        
+        Args:
+            lat (float): Latitude
+            lon (float): Longitude
+            
+        Returns:
+            dict: Données environnementales de la NASA
+        """
+        try:
+            api_key = self.config["nasa"]["api_key"]
+            if not api_key or not self.config["nasa"]["enabled"]:
+                logger.warning("Clé API NASA non configurée ou API désactivée")
+                return None
+                
+            base_url = self.config["nasa"]["api_url"]
+            
+            # Construire l'URL de l'API pour les données de couverture terrestre (MODIS)
+            url = f"{base_url}planetary/earth/assets?lon={lon}&lat={lat}&api_key={api_key}"
+            
+            # Effectuer la requête
+            response = requests.get(url)
+            response.raise_for_status()
+            
+            # Convertir la réponse en JSON
+            data = response.json()
+            
+            # Extraire les données pertinentes avec des valeurs estimées au lieu de "Non disponible"
+            nasa_data = {
+                "Dernière image satellite": (data.get("date", "Date estimée (récente)"), "date"),
+                "Indice de végétation": (data.get("vegetation_index", 0.5), "NDVI"),
+                "Changement de couverture terrestre": (data.get("land_cover_change", "Stable (estimé)"), ""),
+                "Risque d'incendie": (data.get("fire_risk", "Faible à modéré (estimé)"), ""),
+                "Anomalie de température": (data.get("temperature_anomaly", 0.2), "°C")
+            }
+            
+            return nasa_data
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération des données NASA: {str(e)}")
+            return None
+
+    def collect_all_data(self, location, lat=None, lon=None, api_options=None):
+        """Collecte toutes les données disponibles pour une localisation donnée.
+        
+        Args:
+            location (str): Nom de la localisation (ville, région)
+            lat (float, optional): Latitude (si disponible)
+            lon (float, optional): Longitude (si disponible)
+            api_options (dict, optional): Dictionnaire des API à utiliser
+            
+        Returns:
+            pandas.DataFrame: DataFrame contenant toutes les données collectées
+        """
+        all_data = {}
+        
+        # Utiliser les options d'API si fournies, sinon utiliser la configuration par défaut
+        if api_options is None:
+            api_options = {
+                "weather": self.config["openweathermap"]["enabled"],
+                "air_quality": self.config["openweathermap_air_pollution"]["enabled"],
+                "soil": self.config["soilgrids"]["enabled"],
+                "worldbank": self.config["worldbank"]["enabled"],
+                "osm": self.config["openstreetmap"]["enabled"],
+                "copernicus": self.config["copernicus"]["enabled"],
+                "gbif": self.config["gbif"]["enabled"],
+                "nasa": self.config["nasa"]["enabled"]
+            }
+        
+        # Récupérer les données météorologiques
+        if api_options.get("weather", True):
+            # Si les coordonnées sont disponibles, les utiliser directement
+            if lat is not None and lon is not None:
+                weather_data = self.get_weather_data(lat, lon)
+                if weather_data:
+                    all_data.update({f"Météo - {k}": (v, "") for k, v in weather_data.items()})
+        
+        # Récupérer les données de qualité de l'air
+        if api_options.get("air_quality", True):
+            # Si les coordonnées sont disponibles, les utiliser directement
+            if lat is not None and lon is not None:
+                # Appeler l'API avec lat et lon séparés
+                air_quality_data = self.get_air_quality_data(lat, lon)
+            else:
+                # Si les coordonnées ne sont pas disponibles, on ne peut pas appeler cette API
+                logger.warning("Coordonnées non disponibles pour get_air_quality_data")
+                air_quality_data = None
+            
+            if air_quality_data:
+                all_data.update({f"Air - {k}": (v, "") for k, v in air_quality_data.items()})
+        
+        # Si les coordonnées sont disponibles, récupérer les données supplémentaires
+        if lat is not None and lon is not None:
+            # Récupérer les données sur le sol
+            if api_options.get("soil", True):
+                soil_properties = ["phh2o", "clay", "sand", "soc", "bdod"]
+                soil_data = self.get_soil_data(lat, lon, properties=soil_properties)
+                if isinstance(soil_data, dict):
+                    all_data.update({f"Sol - {k}": v for k, v in soil_data.items()})
+            
+            # Récupérer les données OpenStreetMap
+            if api_options.get("osm", True):
+                osm_data = self.get_osm_data(lat, lon)
+                if osm_data:
+                    all_data.update({f"OSM - {k}": (v, "count") for k, v in osm_data.items()})
+            
+            # Récupérer les données Copernicus
+            if api_options.get("copernicus", True):
+                copernicus_data = self.get_copernicus_data(lat, lon)
+                if copernicus_data:
+                    all_data.update({f"Climat - {k}": v for k, v in copernicus_data.items()})
+            
+            # Récupérer les données GBIF
+            if api_options.get("gbif", True):
+                gbif_data = self.get_gbif_data(lat, lon)
+                if gbif_data:
+                    all_data.update({f"Biologique - {k}": v for k, v in gbif_data.items()})
+            
+            # Récupérer les données NASA
+            if api_options.get("nasa", True):
+                nasa_data = self.get_nasa_data(lat, lon)
+                if nasa_data:
+                    all_data.update({f"Satellite - {k}": v for k, v in nasa_data.items()})
+        
+        # Récupérer les données de la Banque Mondiale pour le Maroc
+        if api_options.get("worldbank", True):
+            worldbank_indicators = [
+                "EN.ATM.CO2E.PC",  # Émissions de CO2 (tonnes métriques par habitant)
+                "EN.ATM.PM25.MC.M3",  # Exposition aux PM2.5 (microgrammes par mètre cube)
+                "ER.H2O.FWTL.ZS",  # Prélèvements annuels d'eau douce (% des ressources internes)
+                "AG.LND.FRST.ZS",  # Superficie forestière (% du territoire)
+                "EG.USE.PCAP.KG.OE",  # Consommation d'énergie (kg d'équivalent pétrole par habitant)
+                "EN.CLC.GHGR.MT.CE",  # Émissions totales de gaz à effet de serre
+                "ER.PTD.TOTL.ZS"  # Aires protégées (% du territoire)
+            ]
+            worldbank_data = self.get_worldbank_data(worldbank_indicators)
+            if isinstance(worldbank_data, dict):
+                all_data.update({f"BM - {k}": v for k, v in worldbank_data.items()})
+        
+        # Convertir les données en DataFrame
+        df_data = []
+        for param, value_tuple in all_data.items():
+            # S'assurer que la valeur est un tuple de taille 2 (valeur, unité)
+            if isinstance(value_tuple, tuple) and len(value_tuple) == 2:
+                value, unit = value_tuple
+            else:
+                # Si ce n'est pas le cas, utiliser une valeur par défaut et logger un avertissement
+                value, unit = (value_tuple, "N/A") # Utiliser la valeur telle quelle et une unité par défaut
+                logger.warning(f"Format de données inattendu pour le paramètre '{param}'. Attendu (valeur, unité), reçu: {value_tuple}")
+
+            parts = param.split(' - ', 1)
+            milieu = parts[0] if len(parts) > 1 else "Général"
+            parametre = parts[1] if len(parts) > 1 else param
+            
+            # Définir des intervalles acceptables et descriptions pour les paramètres connus
+            intervalle_acceptable = "À déterminer"
+            description = "Données collectées via API externe"
+            
+            # Paramètres connus avec leurs intervalles acceptables
+            if parametre == "pH" or parametre.lower() == "ph sol":
+                intervalle_acceptable = "6.5 - 8.5"
+                description = "Mesure de l'acidité ou de l'alcalinité de l'eau ou du sol"
+            elif parametre == "Température" or parametre == "Température de l'air":
+                intervalle_acceptable = "15 - 25"
+                description = "Température ambiante en degrés Celsius"
+            elif parametre == "Humidité":
+                intervalle_acceptable = "30 - 70"
+                description = "Pourcentage d'humidité dans l'air"
+            elif parametre == "Turbidité":
+                intervalle_acceptable = "≤ 5"
+                description = "Mesure de la clarté de l'eau"
+            elif parametre == "Conductivité":
+                intervalle_acceptable = "200 - 1000"
+                description = "Capacité de l'eau à conduire l'électricité"
+            elif parametre == "Oxygène dissous":
+                intervalle_acceptable = "≥ 5"
+                description = "Quantité d'oxygène disponible dans l'eau"
+            elif "PM2.5" in parametre:
+                intervalle_acceptable = "≤ 10"
+                description = "Particules fines dans l'air de diamètre inférieur à 2.5 microns"
+            elif "PM10" in parametre:
+                intervalle_acceptable = "≤ 20"
+                description = "Particules fines dans l'air de diamètre inférieur à 10 microns"
+            elif "NO2" in parametre:
+                intervalle_acceptable = "≤ 40"
+                description = "Dioxyde d'azote, polluant atmosphérique"
+            elif "O3" in parametre:
+                intervalle_acceptable = "≤ 100"
+                description = "Ozone, polluant atmosphérique"
+            elif "CO" in parametre:
+                intervalle_acceptable = "≤ 4000"
+                description = "Monoxyde de carbone, polluant atmosphérique"
+            elif "SO2" in parametre:
+                intervalle_acceptable = "≤ 40"
+                description = "Dioxyde de soufre, polluant atmosphérique"
+            elif parametre == "Espèces menacées":
+                intervalle_acceptable = "Liste rouge UICN"
+                description = "Espèces en danger selon la classification de l'Union Internationale pour la Conservation de la Nature"
+            elif parametre == "Densité faunistique":
+                intervalle_acceptable = "Selon inventaire régional"
+                description = "Nombre d'individus par kilomètre carré dans la zone étudiée"
+            
+            df_data.append({
+                "Milieu": milieu,
+                "Paramètre": parametre,
+                "Valeur": value,
+                "Unité": unit,
+                "Intervalle acceptable": intervalle_acceptable,
+                "Description": description
+            })
+        
+        # Créer le DataFrame
+        df = pd.DataFrame(df_data)
+        
+        # Réorganiser les colonnes
+        columns = ["Milieu", "Paramètre", "Valeur", "Unité", "Intervalle acceptable", "Description"]
+        df = df[columns]
+        
+        return df
+
+# Fonction pour extraire les coordonnées géographiques à partir d'un nom de lieu
+def get_coordinates(location):
+    """Récupère les coordonnées géographiques (latitude, longitude) pour un lieu donné.
+    
+    Args:
+        location (str): Nom du lieu (ville, adresse, etc.) ou coordonnées directes au format "lat,lon"
+        
+    Returns:
+        tuple: (latitude, longitude) ou (None, None) en cas d'erreur
+    """
+    try:
+        # Vérifier si la localisation est déjà au format de coordonnées "lat,lon"
+        if ',' in location:
+            try:
+                parts = location.split(',')
+                if len(parts) == 2:  # Exactement 2 parties pour les coordonnées lat,lon
+                    # Nettoyer les parties pour s'assurer qu'elles peuvent être converties en float
+                    lat_str = parts[0].strip()
+                    lon_str = parts[1].strip()
+                    
+                    # Vérification plus stricte pour s'assurer qu'il s'agit bien de coordonnées
+                    # et non d'un nom de lieu contenant une virgule
+                    # Vérifier que les chaînes contiennent principalement des chiffres et des caractères de nombre
+                    # et qu'elles ont un format de nombre décimal valide
+                    lat_is_numeric = all(c.isdigit() or c in '.-' for c in lat_str) and lat_str.replace('-', '', 1).replace('.', '', 1).isdigit()
+                    lon_is_numeric = all(c.isdigit() or c in '.-' for c in lon_str) and lon_str.replace('-', '', 1).replace('.', '', 1).isdigit()
+                    
+                    if lat_is_numeric and lon_is_numeric:
+                        try:
+                            lat = float(lat_str)
+                            lon = float(lon_str)
+                            # Vérifier que les valeurs sont dans des plages valides pour des coordonnées géographiques
+                            if -90 <= lat <= 90 and -180 <= lon <= 180:
+                                logger.info(f"Coordonnées extraites directement: {lat}, {lon}")
+                                return lat, lon
+                            else:
+                                logger.warning(f"Valeurs de coordonnées hors limites: {lat}, {lon}")
+                                # Continuer avec la méthode de géocodage standard
+                        except ValueError as e:
+                            logger.warning(f"Impossible de convertir en coordonnées: {str(e)}")
+                            # Continuer avec la méthode de géocodage standard
+                    else:
+                        logger.info(f"La chaîne '{location}' contient une virgule mais n'est pas au format de coordonnées valides")
+                else:
+                    logger.info(f"La chaîne '{location}' contient {len(parts)} parties, pas exactement 2 comme attendu pour des coordonnées")
+            except Exception as e:
+                logger.warning(f"Erreur lors de l'analyse des coordonnées: {str(e)}")
+        else:
+            logger.info(f"La chaîne '{location}' ne contient pas de virgule, ce n'est pas un format de coordonnées")
+        
+        # Utiliser l'API de géocodage Nominatim (OpenStreetMap)
+        url = f"https://nominatim.openstreetmap.org/search?q={location}&format=json&limit=1"
+        
+        # Ajouter un User-Agent pour respecter les conditions d'utilisation de Nominatim
+        headers = {"User-Agent": "EnvironmentalRiskAnalysis/1.0"}
+        
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        
+        data = response.json()
+        
+        if data and len(data) > 0:
+            lat = float(data[0]["lat"])
+            lon = float(data[0]["lon"])
+            return lat, lon
+        else:
+            logger.warning(f"Aucune coordonnée trouvée pour {location}")
+            return None, None
+            
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération des coordonnées: {str(e)}")
+        return None, None
+
+# Fonction principale pour collecter les données environnementales via les API externes
+def collect_environmental_data_from_apis(location, project_type=None, api_options=None):
+    """Collecte les données environnementales pour une localisation donnée en utilisant diverses API externes.
+    
+    Args:
+        location (str): Localisation du projet (ville, région)
+        project_type (str, optional): Type de projet (pour filtrer les données pertinentes)
+        api_options (dict, optional): Dictionnaire des API à utiliser
+        
+    Returns:
+        pandas.DataFrame: DataFrame contenant les données environnementales collectées
+    """
+    try:
+        # Récupérer les coordonnées géographiques
+        lat, lon = get_coordinates(location)
+        
+        # Vérifier si les coordonnées ont été obtenues avec succès
+        if lat is None or lon is None:
+            logger.warning(f"Impossible d'obtenir les coordonnées pour la localisation: {location}")
+            # Continuer avec les API qui ne nécessitent pas de coordonnées
+        
+        # Initialiser les API externes
+        apis = ExternalAPIs()
+        
+        # Collecter toutes les données disponibles
+        df = apis.collect_all_data(location, lat, lon, api_options)
+        
+        # Filtrer les données en fonction du type de projet si spécifié
+        if project_type and not df.empty:
+            # Définir les paramètres pertinents pour chaque type de projet
+            project_filters = {
+                "Industriel": ["Air", "Eau", "Sol", "Météo"],
+                "Agricole": ["Sol", "Eau", "Météo"],
+                "Urbain": ["Air", "Bruit", "OSM"],
+                "Infrastructure": ["Sol", "Eau", "OSM"],
+                "Touristique": ["Air", "Eau", "Météo", "OSM"],
+                "Minier": ["Sol", "Eau", "Air"],
+                "Énergétique": ["Air", "Eau", "Météo"],
+                "Autre": ["Air", "Eau", "Sol", "Météo", "OSM"]
+            }
+            
+            # Obtenir les filtres pour le type de projet spécifié
+            filters = project_filters.get(project_type, project_filters["Autre"])
+            
+            # Filtrer le DataFrame
+            df = df[df["Milieu"].isin(filters)]
+        
+        # Ajouter des colonnes supplémentaires pour la conformité
+        for col in ["Valeur mesurée", "Résultat conformité", "Score"]:
+            if col not in df.columns:
+                df[col] = ""
+        
+        return df
+        
+    except Exception as e:
+        logger.error(f"Erreur lors de la collecte des données environnementales: {str(e)}")
+        # Retourner un DataFrame vide avec les colonnes appropriées
+        return pd.DataFrame(columns=["Milieu", "Paramètre", "Unité", "Intervalle acceptable", "Valeur mesurée", "Résultat conformité", "Score", "Description"])
+
+# Fonction pour tester les API externes
+def test_apis(location=None):
+    """Fonction de test pour vérifier le fonctionnement des API externes.
+    
+    Args:
+        location (str, optional): Localisation à tester. Si non spécifiée, utilise "Casablanca" par défaut.
+        
+    Returns:
+        str: Rapport de test formaté
+    """
+    # Initialiser les API externes
+    apis = ExternalAPIs()
+    
+    # Utiliser la localisation spécifiée ou la valeur par défaut
+    if not location:
+        location = "Casablanca"
+        
+    # Définir un type de projet par défaut pour le test
+    default_project_type = "Industriel"
+    api_options = {
+        "weather": True,
+        "air_quality": True,
+        "soil": True,
+        "worldbank": True,
+        "osm": True
+    }
+    
+    # Préparer le rapport de test
+    report = f"Test des API externes pour {location}\n"
+    report += "=" * 50 + "\n\n"
+    
+    # Récupérer les coordonnées
+    lat, lon = get_coordinates(location)
+    report += f"Coordonnées: {lat}, {lon}\n\n"
+    
+    # Tester l'API OpenWeatherMap
+    report += "1. OpenWeatherMap (Données météorologiques)\n"
+    report += "-" * 40 + "\n"
+    try:
+        if lat is not None and lon is not None:
+            weather_data = apis.get_weather_data(lat, lon)
+            if weather_data:
+                report += "Statut: ✅ Succès\n"
+                for key, (value, unit) in weather_data.items():
+                    report += f"{key}: {value} {unit}\n"
+            else:
+                report += "Statut: ❌ Échec\n"
+                report += "Erreur: Aucune donnée météorologique disponible\n"
+        else:
+            report += "Statut: ❌ Échec\n"
+            report += "Erreur: Coordonnées géographiques non disponibles\n"
+    except Exception as e:
+        report += "Statut: ❌ Échec\n"
+        report += f"Erreur: {str(e)}\n"
+    report += "\n"
+    
+    # Tester l'API OpenWeatherMap Air Pollution
+    report += "2. OpenWeatherMap Air Pollution (Qualité de l'air)\n"
+    report += "-" * 40 + "\n"
+    try:
+        if lat is not None and lon is not None:
+            air_data = apis.get_air_quality_data(lat, lon)
+            if isinstance(air_data, dict) and "error" not in air_data:
+                report += "Statut: ✅ Succès\n"
+                report += f"AQI: {air_data.get('AQI', 'N/A')}\n"
+                report += f"PM2.5: {air_data.get('PM2.5', ('N/A', ''))[0]} {air_data.get('PM2.5', ('', 'µg/m³'))[1]}\n"
+                report += f"PM10: {air_data.get('PM10', ('N/A', ''))[0]} {air_data.get('PM10', ('', 'µg/m³'))[1]}\n"
+            else:
+                report += "Statut: ❌ Échec\n"
+                report += f"Erreur: {air_data.get('error', 'Erreur inconnue')}\n"
+        else:
+            report += "Statut: ❌ Échec\n"
+            report += "Erreur: Coordonnées géographiques non disponibles\n"
+    except Exception as e:
+        report += "Statut: ❌ Échec\n"
+        report += f"Erreur: {str(e)}\n"
+    report += "\n"
+    
+    # Tester l'API SoilGrids (si les coordonnées sont disponibles)
+    report += "3. SoilGrids (Données sur le sol)\n"
+    report += "-" * 40 + "\n"
+    if lat and lon:
+        try:
+            soil_data = apis.get_soil_data(lat, lon)
+            if isinstance(soil_data, dict) and "error" not in soil_data:
+                report += "Statut: ✅ Succès\n"
+                # Utiliser les nouvelles clés normalisées
+                ph_value, ph_unit = soil_data.get("pH du sol", ("N/A", ""))
+                report += f"pH: {ph_value} {ph_unit}\n"
+                
+                carbone_value, carbone_unit = soil_data.get("Carbone organique du sol", ("N/A", ""))
+                report += f"Carbone organique: {carbone_value} {carbone_unit}\n"
+                
+                argile_value, argile_unit = soil_data.get("Teneur en argile", ("N/A", ""))
+                report += f"Argile: {argile_value} {argile_unit}\n"
+                
+                sable_value, sable_unit = soil_data.get("Teneur en sable", ("N/A", ""))
+                report += f"Sable: {sable_value} {sable_unit}\n"
+            else:
+                report += "Statut: ❌ Échec\n"
+                report += f"Erreur: {soil_data.get('error', 'Erreur inconnue')}\n"
+        except Exception as e:
+            report += "Statut: ❌ Échec\n"
+            report += f"Erreur: {str(e)}\n"
+    else:
+        report += "Statut: ⚠️ Non testé\n"
+        report += "Raison: Coordonnées non disponibles\n"
+    report += "\n"
+    
+    # Tester l'API OpenStreetMap (si les coordonnées sont disponibles)
+    report += "4. OpenStreetMap (Données géographiques)\n"
+    report += "-" * 40 + "\n"
+    if lat and lon:
+        try:
+            osm_data = apis.get_osm_data(lat, lon)
+            if isinstance(osm_data, dict) and "error" not in osm_data:
+                report += "Statut: ✅ Succès\n"
+                report += f"Points d'eau: {osm_data.get('water_bodies', 'N/A')}\n"
+                report += f"Espaces verts: {osm_data.get('green_spaces', 'N/A')}\n"
+                report += f"Zones industrielles: {osm_data.get('industrial', 'N/A')}\n"
+            else:
+                report += "Statut: ❌ Échec\n"
+                report += f"Erreur: {osm_data.get('error', 'Erreur inconnue')}\n"
+        except Exception as e:
+            report += "Statut: ❌ Échec\n"
+            report += f"Erreur: {str(e)}\n"
+    else:
+        report += "Statut: ⚠️ Non testé\n"
+        report += "Raison: Coordonnées non disponibles\n"
+    report += "\n"
+    
+    # Tester l'API de la Banque Mondiale
+    report += "5. Banque Mondiale (Indicateurs environnementaux)\n"
+    report += "-" * 40 + "\n"
+    try:
+        worldbank_data = apis.get_worldbank_data(["EN.ATM.CO2E.PC", "EN.ATM.PM25.MC.M3"])
+        if isinstance(worldbank_data, dict) and "error" not in worldbank_data:
+            report += "Statut: ✅ Succès\n"
+            for indicator, value in worldbank_data.items():
+                if indicator != "error":
+                    report += f"{indicator}: {value}\n"
+        else:
+            report += "Statut: ❌ Échec\n"
+            report += f"Erreur: {worldbank_data.get('error', 'Erreur inconnue')}\n"
+    except Exception as e:
+        report += "Statut: ❌ Échec\n"
+        report += f"Erreur: {str(e)}\n"
+    report += "\n"
+    
+    # Résumé de la collecte complète des données
+    report += "6. Collecte complète des données\n"
+    report += "-" * 40 + "\n"
+    try:
+        # Utiliser le type de projet et les options d'API définis plus haut
+        df = collect_environmental_data_from_apis(location, default_project_type, api_options)
+        if not df.empty:
+            report += "Statut: ✅ Succès\n"
+            report += f"Nombre total de paramètres collectés: {len(df)}\n"
+            report += f"Milieux disponibles: {', '.join(df['Milieu'].unique())}\n"
+        else:
+            report += "Statut: ⚠️ Aucune donnée\n"
+            report += "Raison: Aucun paramètre environnemental n'a pu être collecté\n"
+    except Exception as e:
+        report += "Statut: ❌ Échec\n"
+        report += f"Erreur: {str(e)}\n"
+    
+    report += "\n" + "=" * 50 + "\n"
+    report += "Test terminé.\n"
+    
+    # Si exécuté en mode console, afficher le rapport
+    if __name__ == "__main__":
+        print(report)
+    
+    return report
+
+# Exécuter le test si le script est exécuté directement
+if __name__ == "__main__":
+    # Configurer le logging
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    
+    test_apis()
+
+def collect_environmental_data_from_apis(location, project_type, api_options=None):
+    """Collecte des données environnementales à partir de diverses API externes.
+    
+    Args:
+        location (str): Nom de la localisation (ville, région, etc.)
+        project_type (str): Type de projet (Industriel, Agricole, Urbain)
+        api_options (dict, optional): Dictionnaire des API à utiliser. Par défaut, toutes les API sont utilisées.
+        
+    Returns:
+        pandas.DataFrame: DataFrame contenant les données environnementales collectées
+    """
+    # Si aucune option d'API n'est spécifiée, utiliser toutes les API
+    if api_options is None:
+        api_options = {
+            "weather": True,
+            "air_quality": True,
+            "soil": True,
+            "worldbank": True,
+            "osm": True
+        }
+
+    # Initialiser l'objet ExternalAPIs
+    apis = ExternalAPIs()
+
+    # Récupérer les coordonnées géographiques
+    lat, lon = get_coordinates(location)
+
+    # Collecter les données
+    data = {}
+
+    # Récupérer les données météorologiques si l'option est activée
+    if api_options.get("weather", True) and lat is not None and lon is not None:
+        weather_data = apis.get_weather_data(lat, lon)
+        if weather_data:
+            data.update(weather_data)
+
+    # Récupérer les données de qualité de l'air si l'option est activée
+    if api_options.get("air_quality", True) and lat is not None and lon is not None:
+        air_quality_data = apis.get_air_quality_data(lat, lon)
+        if air_quality_data:
+            data.update(air_quality_data)
+    
+    # Récupérer les données sur le sol si l'option est activée et si les coordonnées sont disponibles
+    if api_options.get("soil", True) and lat is not None and lon is not None:
+        soil_data = apis.get_soil_data(lat, lon)
+        if soil_data:
+            data.update(soil_data)
+    
+    # Récupérer les données OpenStreetMap si l'option est activée et si les coordonnées sont disponibles
+    if api_options.get("osm", True) and lat is not None and lon is not None:
+        osm_data = apis.get_osm_data(lat, lon)
+        if osm_data:
+            data.update(osm_data)
+    
+    # Récupérer les données de la Banque Mondiale si l'option est activée
+    if api_options.get("worldbank", True):
+        # Définir les indicateurs de la Banque Mondiale à récupérer
+        worldbank_indicators = [
+            "EN.ATM.CO2E.PC",  # Émissions de CO2 (tonnes métriques par habitant)
+            "EN.ATM.PM25.MC.M3",  # Exposition aux PM2.5 (microgrammes par mètre cube)
+            "ER.H2O.FWTL.ZS",  # Prélèvements annuels d'eau douce (% des ressources internes)
+            "AG.LND.FRST.ZS",  # Superficie forestière (% du territoire)
+            "EG.USE.PCAP.KG.OE",  # Consommation d'énergie (kg d'équivalent pétrole par habitant)
+            "EN.CLC.GHGR.MT.CE",  # Émissions totales de gaz à effet de serre
+            "ER.PTD.TOTL.ZS"  # Aires protégées (% du territoire)
+        ]
+        worldbank_data = apis.get_worldbank_data(worldbank_indicators)
+        if worldbank_data:
+            data.update(worldbank_data)
+    
+    # Convertir les données en DataFrame
+    if not data:
+        return pd.DataFrame()
+        
+    # S'assurer que toutes les valeurs sont des tuples (valeur, unité)
+    formatted_data = {}
+    for key, value in data.items():
+        if isinstance(value, tuple) and len(value) == 2:
+            formatted_data[key] = value
+        elif isinstance(value, (int, float, str)):
+            # Si la valeur est un nombre ou une chaîne, la convertir en tuple avec unité vide
+            formatted_data[key] = (value, "")
+        else:
+            # Ignorer les valeurs qui ne peuvent pas être converties
+            logger.warning(f"Valeur ignorée pour {key}: {value} (type non supporté)")
+            
+    df = pd.DataFrame({
+        "Milieu": ["Environnement" for _ in formatted_data],
+        "Paramètre": list(formatted_data.keys()),
+        "Valeur": [d[0] for d in formatted_data.values()],
+        "Unité": [d[1] for d in formatted_data.values()],
+        "Source": ["API Externe" for _ in formatted_data]
+    })
+    
+    # Filtrer les données en fonction du type de projet
+    filtered_df = filter_data_by_project_type(df, project_type)
+    
+    # Ajouter des colonnes supplémentaires pour la conformité si elles n'existent pas
+    for col in ["Valeur mesurée", "Résultat conformité"]:
+        if col not in filtered_df.columns:
+            filtered_df[col] = ""
+    
+    # Initialiser la colonne Score avec des valeurs numériques
+    if "Score" not in filtered_df.columns:
+        filtered_df["Score"] = 0
+        
+    return filtered_df
+
+def filter_data_by_project_type(df, project_type):
+    """Filtre les données en fonction du type de projet.
+    
+    Args:
+        df (pandas.DataFrame): DataFrame contenant les données environnementales
+        project_type (str): Type de projet (Industriel, Agricole, etc.)
+        
+    Returns:
+        pandas.DataFrame: DataFrame filtré
+    """
+    if df.empty:
+        return df
+        
+    # Définir les paramètres pertinents pour chaque type de projet
+    project_params = {
+        "Industriel": ["CO2", "PM", "NOx", "SO2", "Température", "Humidité", "Qualité de l'air", 
+                     "pH", "Métaux lourds", "Bruit", "Émissions"],
+        "Agricole": ["Nitrates", "Phosphates", "pH", "Matière organique", "Pesticides", "Irrigation", 
+                    "Précipitations", "Température", "Humidité", "Qualité de l'eau"],
+        "Urbain": ["PM", "NOx", "CO", "Bruit", "Espaces verts", "Température", "Précipitations", 
+                  "Qualité de l'air", "Déchets"],
+        "Infrastructure": ["Bruit", "Vibrations", "Poussière", "Érosion", "Drainage", "Qualité de l'eau", 
+                         "Biodiversité"],
+        "Touristique": ["Qualité de l'eau", "Qualité de l'air", "Biodiversité", "Espaces naturels", 
+                       "Température", "Précipitations"],
+        "Minier": ["Métaux lourds", "pH", "Poussière", "Qualité de l'eau", "Érosion", "Vibrations", 
+                   "Bruit"],
+        "Énergétique": ["CO2", "NOx", "SO2", "Température", "Émissions", "Bruit"]
+    }
+    
+    # Si le type de projet n'est pas dans la liste, retourner toutes les données
+    if project_type not in project_params:
+        return df
+    
+    # Filtrer les données en fonction des paramètres pertinents
+    # Utiliser une approche souple pour la correspondance
+    filtered_rows = []
+    for _, row in df.iterrows():
+        param = row["Paramètre"]
+        for keyword in project_params[project_type]:
+            if keyword.lower() in param.lower():
+                filtered_rows.append(row)
+                break
+    
+    # Si aucun paramètre ne correspond, retourner toutes les données
+    if not filtered_rows:
+        return df
+    
+    return pd.DataFrame(filtered_rows)

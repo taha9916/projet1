@@ -1,0 +1,20 @@
+Rapport d'analyse environnementale
+
+Date: 21/07/2025
+Site: Zone industrielle Nord
+
+Paramètres mesurés:
+- pH: 7.5 unités
+- Température: 22.3 °C
+- Conductivité: 450 µS/cm
+- Oxygène dissous: 6.8 mg/L
+- Nitrates: 12.5 mg/L
+- Phosphates: 0.8 mg/L
+- Turbidité: 5.2 NTU
+- MES: 35 mg/L
+
+Les résultats montrent que le pH est dans la plage acceptable (6.5-8.5).
+La concentration en nitrates est légèrement élevée mais reste sous la limite réglementaire de 50 mg/L.
+La turbidité est conforme aux normes locales qui exigent une valeur inférieure à 10 NTU.
+
+Conclusion: L'eau analysée est globalement de bonne qualité avec une attention particulière à surveiller pour les nitrates.

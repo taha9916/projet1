@@ -1,0 +1,78 @@
+================================================================================
+RAPPORT D'EXTRACTION DES PARAMÈTRES ENVIRONNEMENTAUX
+================================================================================
+Date: 2025-07-28 12:41:27
+
+INFORMATIONS SUR LE FICHIER:
+Chemin: rapport_parametres_environnementaux.txt
+Taille: 61851 octets
+Dernière modification: 2025-07-28 12:35:33
+
+STATISTIQUES:
+Longueur du texte: 58494 caractères
+Nombre de lignes: 1118
+Mots-clés contextuels: 41
+Unités de mesure: 56
+Données structurées: Oui
+
+PARAMÈTRES ENVIRONNEMENTAUX TROUVÉS:
+
+azote: 8844 2
+Contexte: "Encodage: utf-8
+Nombre de caractères: 88442
+Nombre de lignes: 1773"
+
+matière organique: 1442 7
+Contexte: "Nombre de lignes: 1773
+Nombre de mots: 14427
+"
+
+phosphore: 1 1
+Contexte: "RÉSUMÉ DES PARAMÈTRES TROUVÉS:
+Paramètres uniques trouvés: 11
+Total des occurrences de paramètres: 138"
+
+métaux lourds: 13 8
+Contexte: "Paramètres uniques trouvés: 11
+Total des occurrences de paramètres: 138
+"
+
+pH: 2 occurrence
+Contexte: "  - terre: 2 occurrence(s)
+  - physique: 2 occurrence(s)
+  - climatique: 2 occurrence(s)"
+
+carbone organique: 1 occurrence
+Contexte: "  - limite: 2 occurrence(s)
+  - cote: 1 occurrence(s)
+  - zone humide: 1 occurrence(s)"
+
+température: 1 occurrence
+Contexte: "  - quotidien: 1 occurrence(s)
+  - temporaire: 1 occurrence(s)
+  - adéquat: 1 occurrence(s)"
+
+turbidité: oxygène dissous hydrocarbures.
+Contexte: "
+  [INFO] Paramètres environnementaux manquants: profondeur, turbidité, salinité, DBO5, DCO, oxygène dissous, hydrocarbures.
+  Solution: Ajoutez ces paramètres au fichier si vous disposez des informations correspondantes."
+
+DBO5: oxygène dissous hydrocarbures.
+Contexte: "
+  [INFO] Paramètres environnementaux manquants: profondeur, turbidité, salinité, DBO5, DCO, oxygène dissous, hydrocarbures.
+  Solution: Ajoutez ces paramètres au fichier si vous disposez des informations correspondantes."
+
+DCO: oxygène dissous hydrocarbures.
+Contexte: "
+  [INFO] Paramètres environnementaux manquants: profondeur, turbidité, salinité, DBO5, DCO, oxygène dissous, hydrocarbures.
+  Solution: Ajoutez ces paramètres au fichier si vous disposez des informations correspondantes."
+
+SUGGESTIONS POUR AMÉLIORER L'EXTRACTION:
+1. Paramètres importants manquants: conductivité, oxygène dissous. Considérez l'ajout de ces paramètres pour une analyse plus complète.
+2. Essayez d'utiliser le mode d'analyse local si le mode cloud ne parvient pas à extraire les paramètres.
+3. Considérez l'ajout de mots-clés spécifiques comme 'température: 25°C' pour faciliter l'extraction.
+
+CONCLUSION:
+✅ 10 paramètres environnementaux trouvés
+
+================================================================================

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse de Risque Environnemental SLRI - Maroc</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .slri-section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 2rem;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .slri-title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .slri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .slri-phase {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .slri-phase h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .slri-phase p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .demo-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem;
+            border-radius: 20px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .demo-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+        }
+
+        .results {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-title {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .form-title {
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .results-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .slri-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🌍 SLRI Analyzer</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+                <li><a href="#slri">Méthodologie SLRI</a></li>
+                <li><a href="#demo">Démonstration</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="accueil">
+        <h1>Analyse de Risque Environnemental SLRI</h1>
+        <p>Standardiser l'évaluation des risques et impacts environnementaux avec une méthodologie avancée et des outils d'analyse automatisés</p>
+        <a href="#demo" class="cta-button">Commencer l'analyse</a>
+    </section>
+
+    <section class="features" id="fonctionnalites">
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Analyse Multi-Phases</h3>
+            <p>Évaluation complète sur 4 phases : Pré-construction, Construction, Exploitation, et Démantèlement selon la méthodologie SLRI standardisée.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🌊</div>
+            <h3>Évaluation Multi-Milieux</h3>
+            <p>Analyse des impacts sur les milieux physiques (eau, sol, air), biologiques et humains avec des paramètres détaillés et des seuils normatifs.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Scoring Automatisé</h3>
+            <p>Système de notation 0-2 avec calculs multi-critères intégrant durée, étendue et fréquence des impacts environnementaux.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>Classification des Risques</h3>
+            <p>Classification automatique en 4 niveaux : Faible, Moyen, Fort, Très grave avec recommandations spécifiques pour chaque niveau.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🗺️</div>
+            <h3>Données Géolocalisées</h3>
+            <p>Collecte automatique de données environnementales basée sur les coordonnées géographiques via APIs externes validées.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>Rapports Excel SLRI</h3>
+            <p>Export automatique vers Excel selon le format SLRI de référence avec matrice complète et synthèse par phase.</p>
+        </div>
+    </section>
+
+    <section class="slri-section" id="slri">
+        <h2 class="slri-title">Méthodologie SLRI</h2>
+        <p class="slri-description">
+            La méthodologie SLRI (Standardiser l'évaluation des risques et impacts) offre un cadre structuré pour l'évaluation environnementale
+        </p>
+        
+        <div class="slri-grid">
+            <div class="slri-phase">
+                <h4>🏗️ Pré-Construction</h4>
+                <p>Évaluation de l'état initial avec 22 paramètres eau, 14 paramètres sol, 7 paramètres air, plus évaluation biologique et humaine.</p>
+            </div>
+            
+            <div class="slri-phase">
+                <h4>🚧 Construction</h4>
+                <p>Analyse des impacts pendant la phase de construction avec intégration des facteurs temporels et spatiaux.</p>
+            </div>
+            
+            <div class="slri-phase">
+                <h4>⚡ Exploitation</h4>
+                <p>Évaluation continue des impacts opérationnels avec monitoring des paramètres critiques et seuils d'alerte.</p>
+            </div>
+            
+            <div class="slri-phase">
+                <h4>♻️ Démantèlement</h4>
+                <p>Planification de la remise en état et évaluation des impacts de fin de vie du projet.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+        <h2 class="demo-title">Démonstration Interactive</h2>
+        <div class="demo-form">
+            <h3 class="form-title">Analysez un Site</h3>
+            
+            <div class="form-group">
+                <label for="latitude">Latitude :</label>
+                <input type="number" id="latitude" step="any" placeholder="Ex: 34.0209" value="34.0209">
+            </div>
+            
+            <div class="form-group">
+                <label for="longitude">Longitude :</label>
+                <input type="number" id="longitude" step="any" placeholder="Ex: -6.8416" value="-6.8416">
+            </div>
+            
+            <div class="form-group">
+                <label for="project-type">Type de Projet :</label>
+                <select id="project-type" class="form-select">
+                    <option value="industriel">Industriel</option>
+                    <option value="energetique">Énergétique</option>
+                    <option value="infrastructure">Infrastructure</option>
+                    <option value="agricole">Agricole</option>
+                    <option value="touristique">Touristique</option>
+                </select>
+            </div>
+            
+            <button class="analyze-btn" onclick="analyzeEnvironmentalRisk()">
+                🔍 Lancer l'Analyse SLRI
+            </button>
+            
+            <div class="results" id="results">
+                <h4 class="results-title">Résultats de l'Analyse SLRI</h4>
+                <div id="results-content"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Analyse de Risque Environnemental SLRI - Maroc. Méthodologie standardisée pour l'évaluation des impacts environnementaux.</p>
+    </footer>
+
+    <script>
+        function analyzeEnvironmentalRisk() {
+            const latitude = document.getElementById('latitude').value;
+            const longitude = document.getElementById('longitude').value;
+            const projectType = document.getElementById('project-type').value;
+            
+            if (!latitude || !longitude) {
+                alert('Veuillez saisir les coordonnées géographiques');
+                return;
+            }
+            
+            // Simulation de l'analyse SLRI
+            const button = document.querySelector('.analyze-btn');
+            button.textContent = '⏳ Analyse en cours...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                // Structure SLRI complète basée sur les tableaux de référence
+                const slriResults = {
+                    coordinates: { lat: parseFloat(latitude), lon: parseFloat(longitude) },
+                    projectType: projectType,
+                    phases: {
+                        'PRE CONSTRUCTION': {
+                            score: 1.2,
+                            classification: 'MOYEN',
+                            parametres: {
+                                eau: {
+                                    'Température': { valeur: '22°C', seuil: '20-30°C', score: 0, amplitude: 'CONFORME' },
+                                    'pH': { valeur: '7.2', seuil: '6-8', score: 0, amplitude: 'CONFORME' },
+                                    'Turbidité': { valeur: '3 NTU', seuil: '<5 NTU', score: 0, amplitude: 'CONFORME' },
+                                    'Conductivité': { valeur: '850 µS/cm', seuil: '<1000 µS/cm', score: 0, amplitude: 'CONFORME' },
+                                    'DBO5': { valeur: '4 mg/L', seuil: '<5 mg/L', score: 0, amplitude: 'CONFORME' },
+                                    'DCO': { valeur: '20 mg/L', seuil: '<25 mg/L', score: 0, amplitude: 'CONFORME' },
+                                    'Oxygène dissous': { valeur: '6 mg/L', seuil: '>5 mg/L', score: 0, amplitude: 'CONFORME' },
+                                    'Nitrates': { valeur: '55 mg/L', seuil: '<50 mg/L', score: 1, amplitude: 'MOYEN' },
+                                    'Nitrites': { valeur: '', seuil: '<0.5 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Ammoniac': { valeur: '', seuil: '<0.5 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Phosphore total': { valeur: '0.08 mg/L', seuil: '<0.1 mg/L', score: 0, amplitude: 'CONFORME' },
+                                    'Azote total': { valeur: '', seuil: '<10 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Plomb (Pb)': { valeur: '0.008 mg/L', seuil: '<0.01 mg/L', score: 0, amplitude: 'CONFORME' },
+                                    'Cadmium (Cd)': { valeur: '', seuil: '<0.005 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Chrome (Cr)': { valeur: '', seuil: '<0.05 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Cuivre (Cu)': { valeur: '1.5 mg/L', seuil: '<2 mg/L', score: 0, amplitude: 'CONFORME' },
+                                    'Zinc (Zn)': { valeur: '', seuil: '<3 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Nickel (Ni)': { valeur: '', seuil: '<0.07 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Mercure (Hg)': { valeur: '', seuil: '<0.001 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Arsenic (As)': { valeur: '', seuil: '<0.01 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Hydrocarbures totaux (HCT)': { valeur: '', seuil: '<0.05 mg/L', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Hydrocarbures aromatiques polycycliques (HAP)': { valeur: '', seuil: '<0.0002 mg/L', score: '', amplitude: 'NON ANALYSÉ' }
+                                },
+                                sol: {
+                                    'pH': { valeur: '7.5', seuil: '6-8', score: 0, amplitude: 'CONFORME' },
+                                    'Perméabilité': { valeur: '', seuil: '10-6 à 10-4 m/s', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Matière organique': { valeur: '3.2%', seuil: '2-5%', score: 0, amplitude: 'CONFORME' },
+                                    'Carbone organique': { valeur: '', seuil: '1-3%', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Plomb (Pb)': { valeur: '45 mg/kg', seuil: '<85 mg/kg', score: 0, amplitude: 'CONFORME' },
+                                    'Cadmium (Cd)': { valeur: '', seuil: '<1.4 mg/kg', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Chrome (Cr)': { valeur: '', seuil: '<100 mg/kg', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Cuivre (Cu)': { valeur: '28 mg/kg', seuil: '<36 mg/kg', score: 0, amplitude: 'CONFORME' },
+                                    'Zinc (Zn)': { valeur: '', seuil: '<140 mg/kg', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Nickel (Ni)': { valeur: '', seuil: '<35 mg/kg', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Mercure (Hg)': { valeur: '', seuil: '<0.4 mg/kg', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Arsenic (As)': { valeur: '', seuil: '<12 mg/kg', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Azote total': { valeur: '', seuil: '0.1-0.5%', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'Phosphore total': { valeur: '', seuil: '400-1200 mg/kg', score: '', amplitude: 'NON ANALYSÉ' }
+                                },
+                                air: {
+                                    'Poussières totales': { valeur: '', seuil: '<150 µg/m³', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'PM10': { valeur: '65 µg/m³', seuil: '<50 µg/m³', score: 2, amplitude: 'FORT' },
+                                    'PM2.5': { valeur: '30 µg/m³', seuil: '<25 µg/m³', score: 1, amplitude: 'MOYEN' },
+                                    'SO2': { valeur: '95 µg/m³', seuil: '<125 µg/m³', score: 0, amplitude: 'CONFORME' },
+                                    'NOx': { valeur: '', seuil: '<200 µg/m³', score: '', amplitude: 'NON ANALYSÉ' },
+                                    'CO': { valeur: '8 mg/m³', seuil: '<10 mg/m³', score: 0, amplitude: 'CONFORME' },
+                                    'O3 (ozone)': { valeur: '', seuil: '<120 µg/m³', score: '', amplitude: 'NON ANALYSÉ' }
+                                },
+                                biologique: {
+                                    'Flore terrestre': { valeur: 'Présente', seuil: 'Présence/Absence', score: '', amplitude: 'IDENTIFIÉE' },
+                                    'Flore marine': { valeur: '', seuil: 'Présence/Absence', score: '', amplitude: 'NON ÉVALUÉE' },
+                                    'Mammifères': { valeur: 'Présents', seuil: 'Présence/Absence', score: '', amplitude: 'IDENTIFIÉS' },
+                                    'Amphibiens': { valeur: '', seuil: 'Présence/Absence', score: '', amplitude: 'NON ÉVALUÉS' },
+                                    'Reptiles': { valeur: '', seuil: 'Présence/Absence', score: '', amplitude: 'NON ÉVALUÉS' },
+                                    'Statut de protection': { valeur: '', seuil: 'Oui/Non', score: '', amplitude: 'NON ÉVALUÉ' },
+                                    'Présence sur site': { valeur: 'Oui', seuil: 'Oui/Non', score: '', amplitude: 'CONFIRMÉE' }
+                                },
+                                humain: {
+                                    'Population riveraine': { valeur: '', seuil: 'Nombre d\'habitants', score: '', amplitude: 'NON ÉVALUÉE' },
+                                    'Distance habitations': { valeur: '500m', seuil: 'mètres', score: '', amplitude: 'MESURÉE' },
+                                    'Activités économiques': { valeur: 'Agriculture', seuil: 'Type', score: '', amplitude: 'IDENTIFIÉES' },
+                                    'Patrimoine culturel': { valeur: '', seuil: 'Présence/Absence', score: '', amplitude: 'NON ÉVALUÉ' },
+                                    'Accès aux ressources': { valeur: '', seuil: 'Oui/Non', score: '', amplitude: 'NON ÉVALUÉ' }
+                                }
+                            }
+                        }
+                    },
+                    globalScore: 1.2,
+                    majorRisks: [
+                        { parameter: 'PM10', milieu: 'AIR', amplitude: 'FORT', valeur: '65 µg/m³', seuil: '<50 µg/m³' },
+                        { parameter: 'Nitrates', milieu: 'EAU', amplitude: 'MOYEN', valeur: '55 mg/L', seuil: '<50 mg/L' },
+                        { parameter: 'PM2.5', milieu: 'AIR', amplitude: 'MOYEN', valeur: '30 µg/m³', seuil: '<25 µg/m³' }
+                    ],
+                    recommendations: [
+                        'Mettre en place un système de monitoring continu pour PM10 et PM2.5',
+                        'Traitement des eaux pour réduire les nitrates',
+                        'Mesures anti-poussières pendant la construction',
+                        'Compléter les analyses manquantes pour les métaux lourds',
+                        'Évaluation biologique approfondie des espèces protégées'
+                    ]
+                };
+                
+                displayResults(slriResults);
+                
+                button.textContent = '🔍 Lancer l\'Analyse SLRI';
+                button.disabled = false;
+            }, 3000);
+        }
+        
+        function displayResults(results) {
+            const resultsDiv = document.getElementById('results');
+            const contentDiv = document.getElementById('results-content');
+            
+            let html = `
+                <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <strong>📍 Localisation :</strong> ${results.coordinates.lat}, ${results.coordinates.lon}<br>
+                    <strong>🏭 Type de projet :</strong> ${results.projectType}<br>
+                    <strong>📊 Score global SLRI :</strong> ${results.globalScore.toFixed(2)}
+                </div>
+            `;
+            
+            // Affichage des tableaux SLRI complets par phase
+            for (const [phase, phaseData] of Object.entries(results.phases)) {
+                const colorClass = phaseData.classification === 'FAIBLE' ? '#27ae60' : 
+                                 phaseData.classification === 'MOYEN' ? '#f39c12' : 
+                                 phaseData.classification === 'FORT' ? '#e67e22' : '#e74c3c';
+                
+                html += `
+                    <div style="margin-bottom: 2rem; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+                        <div style="background: ${colorClass}; color: white; padding: 0.75rem; font-weight: bold;">
+                            ${phase} - Score: ${phaseData.score.toFixed(2)} (${phaseData.classification})
+                        </div>
+                `;
+                
+                // Tableau des paramètres par milieu
+                for (const [milieu, parametres] of Object.entries(phaseData.parametres)) {
+                    html += `
+                        <div style="margin: 1rem;">
+                            <h6 style="color: #2c3e50; margin-bottom: 0.5rem; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 0.25rem;">
+                                ${milieu === 'eau' ? '💧 MILIEU PHYSIQUE - EAU' : 
+                                  milieu === 'sol' ? '🌱 MILIEU PHYSIQUE - SOL' : 
+                                  milieu === 'air' ? '🌬️ MILIEU PHYSIQUE - AIR' : 
+                                  milieu === 'biologique' ? '🦋 MILIEU BIOLOGIQUE' : 
+                                  '👥 MILIEU HUMAIN'}
+                            </h6>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                                <thead>
+                                    <tr style="background: #f1f3f4;">
+                                        <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: left;">Paramètre</th>
+                                        <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Valeur Mesurée</th>
+                                        <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Seuil de Référence</th>
+                                        <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Score</th>
+                                        <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Amplitude</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+                    
+                    for (const [param, data] of Object.entries(parametres)) {
+                        const amplitudeColor = data.amplitude === 'CONFORME' ? '#27ae60' : 
+                                             data.amplitude === 'MOYEN' ? '#f39c12' : 
+                                             data.amplitude === 'FORT' ? '#e67e22' : 
+                                             data.amplitude === 'TRÈS GRAVE' ? '#e74c3c' : '#6c757d';
+                        
+                        const valeurDisplay = data.valeur === '' ? '<em style="color: #999;">Non analysé</em>' : data.valeur;
+                        const scoreDisplay = data.score === '' ? '-' : data.score;
+                        
+                        html += `
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="border: 1px solid #ddd; padding: 0.5rem; font-weight: 500;">${param}</td>
+                                <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">${valeurDisplay}</td>
+                                <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center; color: #666;">${data.seuil}</td>
+                                <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center; font-weight: bold;">${scoreDisplay}</td>
+                                <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center; color: ${amplitudeColor}; font-weight: bold;">${data.amplitude}</td>
+                            </tr>
+                        `;
+                    }
+                    
+                    html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                }
+                
+                html += `</div>`;
+            }
+            
+            // Résumé des risques majeurs
+            if (results.majorRisks.length > 0) {
+                html += `
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+                        <h5 style="color: #856404; margin-bottom: 0.75rem;">⚠️ Paramètres Non Conformes Identifiés</h5>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <thead>
+                                <tr style="background: #ffeaa7;">
+                                    <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: left;">Paramètre</th>
+                                    <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Milieu</th>
+                                    <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Valeur</th>
+                                    <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Seuil</th>
+                                    <th style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">Niveau de Risque</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                results.majorRisks.forEach(risk => {
+                    const riskColor = risk.amplitude === 'MOYEN' ? '#f39c12' : 
+                                    risk.amplitude === 'FORT' ? '#e67e22' : '#e74c3c';
+                    
+                    html += `
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 0.5rem; font-weight: 500;">${risk.parameter}</td>
+                            <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center;">${risk.milieu}</td>
+                            <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center; font-weight: bold;">${risk.valeur}</td>
+                            <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center; color: #666;">${risk.seuil}</td>
+                            <td style="border: 1px solid #ddd; padding: 0.5rem; text-align: center; color: ${riskColor}; font-weight: bold;">${risk.amplitude}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            
+            // Recommandations
+            if (results.recommendations.length > 0) {
+                html += `
+                    <div style="padding: 1rem; background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 8px;">
+                        <h5 style="color: #0c5460; margin-bottom: 0.75rem;">💡 Recommandations SLRI</h5>
+                        <ul style="margin: 0; padding-left: 1.5rem;">
+                `;
+                
+                results.recommendations.forEach(rec => {
+                    html += `<li style="margin-bottom: 0.5rem; color: #0c5460;">${rec}</li>`;
+                });
+                
+                html += `
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            contentDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+        }
+        
+        // Smooth scrolling pour les liens de navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

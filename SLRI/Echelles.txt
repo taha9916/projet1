@@ -1,0 +1,101 @@
+ÉCHELLES D'ÉVALUATION SLRI
+
+=== SYSTÈME DE SCORING DES PARAMÈTRES ===
+
+SCORE PARAMÈTRE (0-2):
+0 = Conforme aux normes (dans l'intervalle acceptable)
+1 = Dépassement léger (≤ 10% au-dessus de la limite)
+2 = Dépassement important (> 10% au-dessus de la limite)
+
+=== FACTEURS TEMPORELS ET SPATIAUX ===
+
+DURÉE:
+0 = Temporaire (< 1 an)
+1 = Courte durée (1-5 ans)
+2 = Durée moyenne (5-15 ans)
+3 = Longue durée (15-30 ans)
+4 = Permanente (> 30 ans)
+
+ÉTENDUE GÉOGRAPHIQUE:
+0 = Ponctuelle (site du projet)
+1 = Locale (< 1 km)
+2 = Régionale (1-10 km)
+3 = Large échelle (> 10 km)
+
+FRÉQUENCE D'OCCURRENCE:
+0 = Rare (< 1 fois/an)
+1 = Occasionnelle (1-12 fois/an)
+2 = Intermittente (1-4 fois/mois)
+3 = Régulière (1-6 fois/semaine)
+4 = Continue (quotidienne)
+
+=== CALCUL DE L'AMPLITUDE FINALE ===
+
+Formule: Score_paramètre × (Durée + Étendue + Fréquence)
+
+CLASSIFICATION DES RISQUES:
+0-4   = FAIBLE (Vert)
+5-8   = MOYEN (Jaune)
+9-12  = FORT (Orange)
+13+   = TRÈS GRAVE (Rouge)
+
+=== SEUILS DE RÉFÉRENCE PAR MILIEU ===
+
+EAU - PARAMÈTRES PHYSICO-CHIMIQUES:
+pH: 6.5-8.5
+Température: 15-25°C
+Turbidité: < 5 NTU
+Conductivité: < 1000 µS/cm
+Oxygène dissous: > 5 mg/L
+
+EAU - PARAMÈTRES BIOLOGIQUES:
+DBO5: < 5 mg/L
+DCO: < 25 mg/L
+Nitrates: < 50 mg/L
+Phosphore total: < 0.1 mg/L
+
+EAU - MÉTAUX LOURDS:
+Plomb: < 0.01 mg/L
+Cadmium: < 0.005 mg/L
+Mercure: < 0.001 mg/L
+Arsenic: < 0.01 mg/L
+
+SOL - PARAMÈTRES GÉNÉRAUX:
+pH: 6.0-8.0
+Matière organique: 2-5%
+Perméabilité: 10⁻⁶ à 10⁻⁴ m/s
+
+SOL - MÉTAUX LOURDS:
+Plomb: < 85 mg/kg
+Cadmium: < 1.4 mg/kg
+Chrome: < 100 mg/kg
+Cuivre: < 36 mg/kg
+
+AIR - QUALITÉ:
+PM10: < 50 µg/m³
+PM2.5: < 25 µg/m³
+SO₂: < 125 µg/m³
+NOₓ: < 200 µg/m³
+CO: < 10 mg/m³
+
+=== RECOMMANDATIONS PAR NIVEAU DE RISQUE ===
+
+FAIBLE (0-4):
+- Surveillance de routine
+- Maintien des bonnes pratiques
+
+MOYEN (5-8):
+- Surveillance renforcée
+- Mesures préventives
+- Révision des procédures
+
+FORT (9-12):
+- Mesures correctives immédiates
+- Plan d'action détaillé
+- Surveillance continue
+
+TRÈS GRAVE (13+):
+- Arrêt temporaire des activités
+- Mesures d'urgence
+- Réhabilitation nécessaire
+- Notification aux autorités
