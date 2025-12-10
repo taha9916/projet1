@@ -1,0 +1,53 @@
+# Guide d'utilisation du projet Analyse de Risque Environnemental - Maroc
+
+Bienvenue ! Voici les étapes pour utiliser correctement ce projet :
+
+## 1. Prérequis
+- Python 3.8 ou plus récent
+- Installer Git (pour cloner le dépôt)
+- Accès à internet pour certaines fonctionnalités (API, enrichissement web)
+
+## 2. Installation du projet
+1. **Cloner le dépôt GitHub** :
+   ```bash
+   git clone https://github.com/taha9916/projet1.git
+   cd projet1
+   ```
+2. **Installer les dépendances** :
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Installer les modèles IA si nécessaire** :
+   ```bash
+   python install_models.py --model SmolVLM-2B
+   ```
+
+## 3. Lancement de l'application
+- **Interface graphique** :
+  - Double-cliquez sur `lancer_application.bat` ou lancez :
+    ```bash
+    python app.py
+    ```
+- **Serveur web** :
+  - Double-cliquez sur `lancer_serveur_web.bat`
+- **Page d'accueil HTML** :
+  - Double-cliquez sur `demarrer.bat`
+
+## 4. Utilisation
+- Importez vos fichiers de données environnementales (Excel, PDF, images...)
+- Suivez les instructions de l'interface pour analyser les risques
+- Exportez les résultats et rapports via l'interface
+
+## 5. Fonctionnalités principales
+- Analyse multi-milieux (air, eau, sol, humain)
+- Extraction automatique de paramètres à partir d'images et documents
+- Génération de recommandations et plans d'action
+- Tableaux de bord interactifs
+- Export des rapports (Excel, PDF, HTML)
+
+## 6. Conseils
+- Consultez le README.md pour le détail des fonctionnalités avancées
+- Utilisez le dossier `tests/` pour valider l'installation
+- Pour toute question, ouvrez une "issue" sur GitHub
+
+Bonne utilisation !
