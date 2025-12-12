@@ -1867,6 +1867,88 @@ backup_mgr.restore_from_backup(
    - Maintenir à jour les navigateurs et systèmes d'exploitation
    - Être vigilant face aux tentatives de phishing
 
+## Mises à jour récentes (2025-11 → 2025-12)
+
+- **SLRI Excel Updater**
+  - Correspondance des paramètres plus robuste (suppression des accents, espaces, parenthèses, tirets).
+  - Recherche des paramètres dès la ligne 2 pour inclure les premières lignes du tableau SLRI.
+  - Remplissage sécurisé des colonnes D (MIN), E (MAX), F (Valeur mesurée), J (Rejet), K (Mesure+rejet) sans écraser les formules.
+  - Journalisation claire: paramètres trouvés/non trouvés avec la ligne cible.
+
+- **Analyse PDF/Texte volumineux**
+  - Découpage automatique du texte en morceaux (par taille ou tokens selon le fournisseur) avec chevauchement pour préserver le contexte.
+  - Agrégation des réponses en un résultat unique, utilisable pour l'export et la mise à jour SLRI.
+  - Réduction des erreurs liées aux limites de contexte des modèles cloud.
+
+- **Fournisseurs IA et modèles**
+  - Alias `gemini` → fournisseur `google`. Utiliser des modèles valides: `gemini-1.5-pro` (recommandé) ou `gemini-1.0-pro`.
+  - Fallback possible vers `openrouter_qwen` si le fournisseur principal échoue.
+  - Messages d'erreur plus explicites (ex: 404 modèle introuvable, 400 contexte trop long).
+
+- **Interface**
+  - Intégration d'une interface SLRI simplifiée dans l'application (onglets résultats, export, historique).
+
+## Configuration API rapide
+
+Avant d'utiliser l'IA cloud, configurez vos clés et modèles dans `external_api_config.json` (ou `cloud_api_config.json`) et/ou via variables d'environnement.
+
+Exemple minimal (à adapter):
+
+```json
+{
+  "active_provider": "google",
+  "providers": {
+    "google": { "model": "gemini-1.5-pro", "api_key_env": "GEMINI_API_KEY" },
+    "openrouter_qwen": { "model": "qwen2.5-7b-instruct", "api_key_env": "OPENROUTER_API_KEY" }
+  },
+  "nlp": {
+    "chunking": { "enabled": true, "target_tokens": 120000, "overlap_tokens": 1000 }
+  }
+}
+```
+
+Variables d'environnement utiles:
+
+- `GEMINI_API_KEY`
+- `OPENROUTER_API_KEY`
+
+## Dépannage (Gemini/PDF)
+
+- **Erreur 404: modèle introuvable**
+  - Cause: nom de modèle invalide ou non supporté.
+  - Solution: utiliser `gemini-1.5-pro` ou `gemini-1.0-pro`, vérifier la version d'API et la liste des modèles supportés.
+
+- **Erreur 400: contexte trop long**
+  - Cause: le texte envoyé dépasse la fenêtre de contexte du modèle.
+  - Solutions: activer le découpage (chunking), réduire le nombre de pages, ou traiter par lots (ex: 30–50 pages). Ajuster `target_tokens`/`overlap_tokens`.
+
+- **Avertissements pdfminer (non critiques)**
+  - Messages du type `Cannot set gray non-stroke color ...` peuvent être ignorés ou masqués en réduisant le niveau de logs.
+
+## Bonnes pratiques SLRI Excel
+
+- La recherche de correspondance supprime accents/espaces/parenthèses/tirets côté DataFrame et côté Excel.
+- Les formules existantes ne sont pas écrasées (ex: colonne K si formule → conservée).
+- Les en-têtes sont protégés (filtrage par mots-clés). Les paramètres sont recherchés en colonnes A/B/C.
+- En cas de paramètre non trouvé, un avertissement est journalisé avec la version normalisée du nom.
+
+## Exemple: découpage de texte en blocs
+
+Selon le fournisseur, le découpage peut être basé sur caractères ou estimation de tokens.
+
+```python
+def split_text(text, max_len=120000, overlap=1000):
+    chunks = []
+    start = 0
+    while start < len(text):
+        end = min(len(text), start + max_len)
+        chunks.append(text[start:end])
+        start = max(0, end - overlap)
+    return chunks
+```
+
+Ensuite, chaque bloc est envoyé à l'API puis les résultats sont agrégés avant l'export SLRI.
+
 ## Contribution
 
 Les contributions à ce projet sont les bienvenues. Veuillez suivre ces étapes pour contribuer :
